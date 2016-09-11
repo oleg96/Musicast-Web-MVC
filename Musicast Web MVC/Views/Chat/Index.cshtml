@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Chat";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../Content/style.css">
+</head>
+<body style="background-image:url(../Images/1-temnaya-tekstura-kristalov.png)">
+    <h2>Chat room</h2>
+
+    <div class="main">
+        <div id="loginBlock">
+            Enter login:<br />
+            <input id="txtUserName" type="text" readonly/>
+            <input id="btnLogin" type="button" value="Login" />
+        </div>
+        <div id="chatBody">
+            <div id="header"></div>
+            <div id="chatusers">
+                <p><b>All users</b></p>
+            </div>
+            <div id="chatroom"></div>
+            <div id="inputForm">
+                <input type="text" id="message" />
+                <input type="button" id="sendmessage" value="Send" />
+            </div>
+        </div>
+        <input id="hdId" type="hidden" />
+        <input id="username" type="hidden" />
+    </div>
+    <script>
+        var name = "@(User.Identity.Name)";
+        $("#txtUserName").val(name);
+    </script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!--Ссылка на библиотеку SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/util.js"></script>
+</body>
+</html>
