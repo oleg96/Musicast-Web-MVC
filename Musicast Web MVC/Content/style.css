@@ -1,0 +1,246 @@
+#app {
+  margin: 0 auto;
+  width: 500px;
+  position: relative;
+}
+#content {
+ position:relative;
+ height: 630px;
+ padding:0px;
+ margin:0px;
+}
+ 
+#div-pattern {
+ position:absolute;
+ top:0;
+ left:56px;
+ padding:0px;
+}
+ 
+#div-keyboard {
+ position:absolute;
+ top:0;
+ left:0;
+ width:56px;
+  margin:0px;
+}
+
+.pat {
+    width: 16px;
+    height:17px;
+    display:inline-block;
+    margin-left:1px;
+    background: rgba(86, 106, 95, 1);
+}
+
+.pat.active {
+    outline: 2px solid #fff; /* рамка */
+}
+
+.pat_active {
+    width: 16px;
+    height:17px;
+    display:inline-block;
+    margin-left:1px;
+    background: rgba(144, 122, 88, 1);
+}
+
+.seq_row {
+    margin:1px;
+    padding:1px;
+    height:17px;
+}
+.animation {
+    padding: 0px; 
+    margin: 0; 
+    overflow: hidden; 
+    height: 400px;
+}
+
+#r-head {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#r-head h3 {
+  margin-top: 0;
+}
+
+.presets {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.presets li {
+  display: inline-block;
+  border: 1px solid #111;
+}
+.presets a {
+  display: inline-block;
+  padding: 5px;
+  width: 200px;
+  border: 2px solid #333;
+  background: #222;
+  color: #555;
+  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  -webkit-transition: border-color 0.3s ease,  background-color 0.3s ease, color 0.3s ease;
+  transition: border-color 0.3s ease,  background-color 0.3s ease, color 0.3s ease;
+}
+.presets a:hover {
+  background-color: #530;
+  border-color: #ff9900;
+}
+.presets a.active {
+  border-color: #99ccaa;
+  color: rgba(170, 170, 170, 1);
+  -webkit-animation: focused 0.5s ease;
+          animation: focused 0.5s ease;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+.main {
+	color: rgba(170, 170, 170, 1);
+}
+h1 {
+	color: rgba(170, 170, 170, 1);
+}
+h2 {
+	color: rgba(170, 170, 170, 1);
+}
+h3 {
+	color: rgba(170, 170, 170, 1);
+}
+h4.intro {
+	color: rgba(170, 170, 170, 1);
+	display: inline-block;
+}
+h4 {
+	color: rgba(170, 170, 170, 1);
+}
+h5 {
+	color: rgba(170, 170, 170, 1);
+}
+h6 {
+	color: rgba(170, 170, 170, 1);
+}
+address {
+	color: rgba(170, 170, 170, 1);
+}
+.form-group {
+	color: rgba(170, 170, 170, 1);
+}
+#chatusers {
+	display: inline-block;
+	position: absolute;
+	right: 20%;
+}
+#chatroom {
+	display: block;
+	overflow: auto;
+	max-height: 450px;
+	width: 75%;
+}
+#header {
+	display: inline-block;
+}
+#inputForm {
+	display: block;
+}
+img.introimg {
+	width:40%;
+	height:30%;
+}
+p.message {
+	background: rgba(170, 170, 170, 0.25);
+}
+/* Базовый контейнер табов */
+.tabs {
+  min-width: 320px;
+  width: 945px;
+  padding: 0px;
+  margin: 0 auto; 
+}
+/* стили секций с содержанием */
+section {
+  display: none;
+}
+.tabs input {
+  display: none;
+}
+/* стили вкладок (табов) */
+.tabs label {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #555;
+  border: 2px solid #333;
+  background: #222;
+  border-radius: 3px 3px 0 0;
+}
+/* шрифт-иконки от Font Awesome в формате Unicode */
+.tabs label:before {
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+/* изменения стиля заголовков вкладок при наведении */
+.tabs label:hover {
+  color: #888;
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: 0.5s;
+}
+/* стили для активной вкладки */
+.tabs input:checked + label {
+  color: rgba(170, 170, 170, 1);
+  border-top: 2px solid #99ccaa;
+  border-left: 2px solid #99ccaa;
+  border-right: 2px solid #99ccaa;
+  border-bottom: 1px solid #808080;
+  transition-property: border-bottom, border-left, border-right, border-top;
+  transition-duration: 0.5s;
+  background: #222;
+}
+/* активация секций с помощью переключателя :checked */
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+/* медиа запросы для различных типов носителей */  
+@media screen and (max-width: 680px) {
+  .tabs label {
+    font-size: 0;
+  }
+ 
+  .tabs label:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .tabs label {
+    padding: 15px;
+  }
+}
+#pattern {
+    position: relative;
+    width: 800px; 
+    height: 700px;
+}
+#grid {
+    position: absolute;
+    width: 800px; 
+    height: 700px;
+}
+#notes {
+    position: absolute;
+    width: 800px; 
+    height: 700px;
+}
