@@ -231,16 +231,19 @@ section {
 }
 #pattern {
     position: relative;
-    width: 800px; 
+    width: 896px; 
     height: 700px;
 }
 #grid {
     position: absolute;
-    width: 800px; 
+    width: 896px; 
     height: 700px;
 }
 #notes {
     position: absolute;
-    width: 800px; 
+    width: 896px; 
     height: 700px;
+}
+label {
+    color: rgba(170, 170, 170, 1);
 }
