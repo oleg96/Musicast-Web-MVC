@@ -229,9 +229,14 @@ section {
     padding: 15px;
   }
 }
-#pattern {
+#roll {
     position: relative;
-    width: 896px; 
+    width: 996px; 
+    height: 700px;
+}
+#canvas_keys {
+    position: relative;
+    width: 100px; 
     height: 700px;
 }
 #grid {
