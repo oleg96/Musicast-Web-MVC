@@ -24,7 +24,7 @@
         <label for="tab3" title="Synth 3">Synth 3</label>
 
         <section id="content1">
-            @RenderPage("_PartialPageSynth.cshtml");
+            <iframe id="ifrmSynth1" src="../synth.htm" width="100%" style="height: 601px" frameborder=no></iframe>
         </section>
         <section id="content2">
             <iframe id="ifrmSynth2" src="../synth.htm" width="100%" style="height: 601px" frameborder=no></iframe>
@@ -33,7 +33,6 @@
             <iframe id="ifrmSynth3" src="../synth.htm" width="100%" style="height: 601px" frameborder=no></iframe>
         </section>
     </div>
-    <iframe id="ifrmSynth2" src="../synth.htm" width="100%" style="height: 601px; display:none" frameborder=no></iframe>
     <iframe id="ifrmDrum" src="../drum.html" style="height: 600px; width: 44%;" frameborder=no></iframe>
     @*<script>
             function startPlayPattern() {
@@ -60,10 +59,22 @@
     <div class="app">
         <div class="app-region" id="r-top">
             <div class="module transport">
-                <h3>Transport</h3>
-                <button class="transport-play" title="Play" onclick="playNote('A3'); return false;">►</button>
+                <h4>Transport</h4>
+                <button class="transport-play" title="Play" onclick="rollPlayNote('A3', 1500); return false;">►</button>
                 <button class="transport-stop" title="Stop">■</button>
-                <button class="transport-play" title="Save" onclick="savePattern();return false;">Save</button>
+            </div>
+            <div class="module transport">
+                <h4>Notes</h4>
+                <input type="radio" checked name="note" id="1/1" /><label for="1/1">1/1</label>
+                <input type="radio" name="note" id="1/2" /><label for="1/2">1/2</label>
+                <input type="radio" name="note" id="1/4" /><label for="1/4">1/4</label>
+                <input type="radio" name="note" id="1/8" /><label for="1/8">1/8</label>
+                <input type="radio" name="note" id="1/16" /><label for="1/16">1/16</label>
+            </div>
+            <div class="module transport">
+                <h4>Tools</h4>
+                <input type="radio" checked name="tool" id="add"><label for="add">Add</label>
+                <input type="radio" name="tool" id="remove" /><label for="remove">Remove</label>
             </div>
         </div>
     </div>
@@ -75,11 +86,12 @@
         </div>
 
     </div>*@
-    <div id="pattern">
-        <canvas id="grid" width="800" height="700"></canvas>
-        <canvas id="notes" width="800" height="700"></canvas>
+    <div id="roll">
+        <canvas id="canvas_keys" width="70" height="700"></canvas>
+        <canvas id="grid" width="896" height="700"></canvas>
+        <canvas id="notes" width="896" height="700"></canvas>
     </div>
     <script src="../Scripts/pianoRoll.js"></script>
-    <script src="../Scripts/pattern-loader.js"></script>
+    <script src="../Scripts/pattern-player.js"></script>
 </body>
 </html>

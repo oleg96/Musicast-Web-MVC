@@ -229,18 +229,26 @@ section {
     padding: 15px;
   }
 }
-#pattern {
+#roll {
     position: relative;
-    width: 800px; 
+    width: 996px; 
+    height: 700px;
+}
+#canvas_keys {
+    position: relative;
+    width: 100px; 
     height: 700px;
 }
 #grid {
     position: absolute;
-    width: 800px; 
+    width: 896px; 
     height: 700px;
 }
 #notes {
     position: absolute;
-    width: 800px; 
+    width: 896px; 
     height: 700px;
+}
+label {
+    color: rgba(170, 170, 170, 1);
 }

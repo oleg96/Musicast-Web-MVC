@@ -21,7 +21,7 @@
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -215,6 +215,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Pattern.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -234,6 +235,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="pattern.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -251,7 +253,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="synthContext.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -289,7 +290,6 @@
     <Content Include="Views\Sequencer\Sequencer.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
-    <Content Include="Views\Sequencer\_PartialPageSynth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
