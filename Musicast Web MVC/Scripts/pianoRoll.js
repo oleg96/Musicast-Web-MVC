@@ -1,11 +1,22 @@
 ﻿var c_canvas = document.getElementById("grid");
 var context = c_canvas.getContext("2d");
 
+var c_canvas_colored = document.getElementById("colored");
+var context_colored = c_canvas_colored.getContext("2d");
+
+context_colored.beginPath();
+context_colored.rect(0, 0, 896, 700);
+context_colored.fillStyle = 'rgba(60, 60, 60, 1)';
+context_colored.fill();
+
 var c_canvas_notes = document.getElementById("notes");
 var context_notes = c_canvas_notes.getContext("2d");
 
-var c_canvas_keys = document.getElementById("canvas_keys");
+var c_canvas_keys = document.getElementById("keys");
 var context_keys = c_canvas_keys.getContext("2d");
+
+var c_canvas_labels = document.getElementById("note_labels");
+var context_labels = c_canvas_labels.getContext("2d");
 
 var notes = []
 
@@ -28,7 +39,23 @@ context.lineTo(896, 700);
 context.strokeStyle = "#888";
 context.stroke();
 
+var notelbls = ["G", "F", "E", "D", "C", "B", "A"];
+var allnoteslbls = ["G", "F#", "F", "E", "D#", "D", "C#", "C", "B", "A#", "A", "G#"];
+var allnotesarray = [];
+
+var oct = 6;
+for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 12; j++) {
+        allnotesarray.push(allnoteslbls[j] + oct);
+        //console.log(allnotesarray);
+        if (j == 7) {
+            oct--;
+        }
+    }
+}
+
 var y = 0;
+oct = 6;
 for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 7; j++) {
         //context_notes.fillRect(notes[i][0], notes[i][1], notes[i][2], 20);
@@ -40,6 +67,11 @@ for (var i = 0; i < 3; i++) {
             context_keys.lineWidth = 1;
             context_keys.strokeStyle = 'black';
             context_keys.stroke();
+            context_labels.font = "20px Georgia";
+            context_labels.fillText(notelbls[j] + oct, 70, 22 + y);
+            if (j == 4) {
+                oct--;
+            }
             y += 30;
         }
         else if ((j == 0 && i != 0) || j == 3 || j == 6) {
@@ -50,6 +82,8 @@ for (var i = 0; i < 3; i++) {
             context_keys.lineWidth = 1;
             context_keys.strokeStyle = 'black';
             context_keys.stroke();
+            context_labels.font = "20px Georgia";
+            context_labels.fillText(notelbls[j] + oct, 70, 22 + y);
             y += 40;
         }
     }
@@ -60,12 +94,16 @@ for (var i = 0; i < 3; i++) {
         //context_notes.fillRect(notes[i][0], notes[i][1], notes[i][2], 20);
         if (j == 1 || j == 4 || j == 6 || j == 9 || (j == 11 && i != 2)) {
             context_keys.beginPath();
-            context_keys.rect(0, y, 50, 20);
+            context_keys.rect(0, y, 65, 20);
             context_keys.fillStyle = 'black';
             context_keys.fill();
             context_keys.lineWidth = 1;
             context_keys.strokeStyle = 'black';
             context_keys.stroke();
+            context_colored.beginPath();
+            context_colored.rect(0, y, 896, 20);
+            context_colored.fillStyle = 'rgba(40, 40, 40, 1)';
+            context_colored.fill();
         }
         y += 20;
     }
@@ -89,6 +127,52 @@ function rollPlayNote(Note, time) {
 
 }
 
+function rollStopNote(Note) {
+    var iframe = document.getElementsByTagName('iframe')[0];
+
+    var iframeDoc = iframe.contentWindow;
+
+    iframeDoc.stopNote(Note);
+
+}
+
+function playPattern() {
+
+    var ifrmDrum = document.getElementById('ifrmDrum');
+    var ifrmDrumDoc = ifrmDrum.contentWindow;
+    var tempo = ifrmDrumDoc.document.getElementById('input_tempo').value;
+
+    var tempoInMillisec = 60000 / tempo;
+
+    for (var i = 0; i < notes.length; i++) {
+        time = ((notes[i][0] / 14) * tempoInMillisec) / 4;
+        var indexnote = notes[i][1] / 20;
+        var lengthnote = ((notes[i][2] / 14) * tempoInMillisec) / 4 - 5;
+        //console.log("indexnote "+indexnote+" lengthnote "+lengthnote+" time "+time);
+        notePlayer(indexnote, lengthnote, time);
+    }
+
+}
+
+function stopPattern() {
+
+    for (var i = 0; i < notes.length; i++) {
+        var indexnote = notes[i][1] / 20;
+        //console.log("indexnote "+indexnote+" lengthnote "+lengthnote+" time "+time);
+        rollStopNote(allnotesarray[indexnote]);
+    }
+
+}
+
+function notePlayer(indexnote, lengthnote, time) {
+    //code before the play
+    setTimeout(function () {
+        //console.log("note " + allnotesarray[indexnote] + " lengthnote " + lengthnote + " time " + time);
+        rollPlayNote(allnotesarray[indexnote], lengthnote);
+    }, time);
+}
+
+
 function savePattern() {
 
 }
@@ -110,7 +194,7 @@ function loadPattern() {
 
 function isExist(position, note, length) {
     for (var i = 0; i < notes.length; i++) {
-        console.log("item: " + notes[i][0] + " " + notes[i][1] + " " + notes[i][2]);
+        //console.log("item: " + notes[i][0] + " " + notes[i][1] + " " + notes[i][2]);
         if (position >= notes[i][0] && position <= (notes[i][0] + notes[i][2] - 1) && note == notes[i][1]) {
             return true;
         }
@@ -119,8 +203,8 @@ function isExist(position, note, length) {
 }
 
 function isExistPosition(position, note, i) {
-    console.log("position: " + notes[i][0] + " note: " + notes[i][1] + " length: " + notes[i][2]);
-    console.log("coord position: " + position + " note: " + note);
+    //console.log("position: " + notes[i][0] + " note: " + notes[i][1] + " length: " + notes[i][2]);
+    //console.log("coord position: " + position + " note: " + note);
     if (position >= notes[i][0] && position <= (notes[i][0] + notes[i][2] - 1) && note == notes[i][1]) {
         return true;
     }
@@ -157,9 +241,9 @@ $("#notes").click(function (e) {
         var note = y * 20;
         for (var i = 0; i < notes.length; i++) {
             if (isExistPosition(position, note, i)) {
-                console.log("remove " + position + " " + note + " " + i);
+                //console.log("remove " + position + " " + note + " " + i);
                 notes.splice(i, 1);
-                console.log("new length " + notes.length);
+                //console.log("new length " + notes.length);
                 refreshPianoRoll();
                 break;
             }

@@ -229,14 +229,35 @@ section {
     padding: 15px;
   }
 }
-#roll {
+#roll_keyboard {
     position: relative;
     width: 996px; 
     height: 700px;
 }
-#canvas_keys {
+#roll {
     position: relative;
+    left: 100px;
+    width: 896px; 
+    height: 700px;
+}
+#keyboard {
+    position: absolute;
     width: 100px; 
+    height: 700px;
+}
+#keys {
+    position: absolute;
+    width: 100px; 
+    height: 700px;
+}
+#note_labels {
+    position: absolute;
+    width: 100px; 
+    height: 700px;
+}
+#colored {
+    position: absolute;
+    width: 896px; 
     height: 700px;
 }
 #grid {

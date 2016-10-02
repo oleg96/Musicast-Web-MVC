@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -22,6 +22,7 @@
                                 <option value="triangle">Triangle</option>
                                 <option value="sawtooth" selected>Sawtooth</option>
                                 <option value="square">Square</option>
+                                <option value="sine">Sine</option>
                             </select>
                         </div>
                         <div class="right-half">
@@ -49,6 +50,7 @@
                                 <option value="triangle" >Triangle</option>
                                 <option value="sawtooth" selected>Sawtooth</option>
                                 <option value="square">Square</option>
+                                <option value="sine">Sine</option>
                             </select>
                         </div>
                         <div class="right-half">
@@ -76,6 +78,7 @@
                                 <option value="triangle">Triangle</option>
                                 <option value="sawtooth" selected>Sawtooth</option>
                                 <option value="square">Square</option>
+                                <option value="sine">Sine</option>
                             </select>
                         </div>
                         <div class="right-half">
@@ -102,6 +105,7 @@
                         <option value="triangle" selected>Triangle</option>
                         <option value="sawtooth">Sawtooth</option>
                         <option value="square">Square</option>
+                        <option value="sine">Sine</option>
                     </select>
 
                     <label for="lfo-frequency">Frequency</label>
@@ -341,7 +345,7 @@ tsw.getUserMidi(function (midi) {
 function playNote(Note) {
     synth.playNote(Note);
 }
-            function stopNote(Note) {
+function stopNote(Note) {
     synth.stopNote(Note);
 }
         </script>
