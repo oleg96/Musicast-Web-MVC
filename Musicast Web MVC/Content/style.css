@@ -3,6 +3,11 @@
   width: 500px;
   position: relative;
 }
+#app-song {
+  margin: 0 auto;
+  width: 500px;
+  position: relative;
+}
 #content {
  position:relative;
  height: 630px;

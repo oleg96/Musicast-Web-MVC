@@ -34,28 +34,9 @@
         </section>
     </div>
     <iframe id="ifrmDrum" src="../drum.html" style="height: 600px; width: 44%;" frameborder=no></iframe>
-    @*<script>
-            function startPlayPattern() {
-                var i = 0;
-                //var tempo = document.getElementsByTagName("input")[0].value;
-                //console.log(tempo);
-                var time = ((130/60)*1000)/64;
-                //var time = 1000;
-                var timerId = setInterval(function () {
-                    //console.log(time);
-                    patternPlayer(i);
-                    i++;
-                    if (i == 64) {
-                        clearInterval(timerId);
-                    }
-                }, time);
-                // через n сек остановить повторы
-                //setTimeout(function () {
-                    //clearInterval(timerId);
-                    //alert('стоп');
-                //}, time * 64);
-            }
-    </script>*@
+    <div id="app-song">
+
+    </div>
     <div class="app">
         <div class="app-region" id="r-top">
             <div class="module transport">
