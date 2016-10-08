@@ -9,6 +9,43 @@ context_colored.rect(0, 0, 896, 700);
 context_colored.fillStyle = 'rgba(60, 60, 60, 1)';
 context_colored.fill();
 
+var c_canvas_colored_patterns = document.getElementById("colored-patterns");
+var context_colored_patterns = c_canvas_colored_patterns.getContext("2d");
+
+var x = 0;
+
+for (var i = 0; i < 4; i++) {
+    context_colored_patterns.beginPath();
+    context_colored_patterns.rect(x, 0, 112.5, 550);
+    context_colored_patterns.fillStyle = 'rgba(60, 60, 60, 1)';
+    context_colored_patterns.fill();
+
+    x += 112.5;
+
+    context_colored_patterns.beginPath();
+    context_colored_patterns.rect(x, 0, 112.5, 550);
+    context_colored_patterns.fillStyle = 'rgba(40, 40, 40, 1)';
+    context_colored_patterns.fill();
+
+    x += 112.5;
+}
+
+var c_canvas_tracks_patterns = document.getElementById("tracks-patterns");
+var context_tracks_patterns = c_canvas_tracks_patterns.getContext("2d");
+var y = 0;
+
+for (var i = 0; i < 10; i++) {
+    context_tracks_patterns.beginPath();
+    context_tracks_patterns.rect(0, y, 100, 55);
+    context_tracks_patterns.fillStyle = 'rgba(50, 75, 50, 1)';
+    context_tracks_patterns.fill();
+    context_tracks_patterns.lineWidth = 1;
+    context_tracks_patterns.strokeStyle = 'black';
+    context_tracks_patterns.stroke();
+
+    y += 55;
+}
+
 var c_canvas_notes = document.getElementById("notes");
 var context_notes = c_canvas_notes.getContext("2d");
 

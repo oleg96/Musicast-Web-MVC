@@ -4,9 +4,15 @@
   position: relative;
 }
 #app-song {
-  margin: 0 auto;
-  width: 500px;
+    left: 610px;
+  width: 650px;
+  height: 600px;
+  position: absolute;
+}
+#all-patterns {
   position: relative;
+  min-width: 550px;
+  max-width: 550px;
 }
 #content {
  position:relative;
@@ -277,4 +283,33 @@ section {
 }
 label {
     color: rgba(170, 170, 170, 1);
+}
+#tracks-patterns {
+    position: relative;
+    width: 100px; 
+    height: 550px;
+}
+#colored-patterns {
+    position: absolute;
+    width: 450px; 
+    height: 550px;
+}
+#grid-patterns {
+    position: absolute;
+    width: 450px; 
+    height: 550px;
+}
+#pat-patterns {
+    position: absolute;
+    width: 450px; 
+    height: 550px;
+}
+#position-labels-patterns {
+    position: relative;
+    margin-left: 100px;
+    width: 450px; 
+    height: 50px;
+}
+#ifrmDrum {
+    position: relative;
 }
