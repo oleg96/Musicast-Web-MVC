@@ -14,7 +14,7 @@ var context_colored_patterns = c_canvas_colored_patterns.getContext("2d");
 
 var x = 0;
 
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < 128; i++) {
     context_colored_patterns.beginPath();
     context_colored_patterns.rect(x, 0, 112.5, 550);
     context_colored_patterns.fillStyle = 'rgba(60, 60, 60, 1)';
@@ -30,9 +30,43 @@ for (var i = 0; i < 4; i++) {
     x += 112.5;
 }
 
+x = 0;
+var c_canvas_position_labels_patterns = document.getElementById("position-labels-patterns");
+var context_position_labels_patterns = c_canvas_position_labels_patterns.getContext("2d");
+
+var c_canvas_grid_patterns = document.getElementById("grid-patterns");
+var context_grid_patterns = c_canvas_grid_patterns.getContext("2d");
+var y = 0;
+
+for (var i = 0; i < 256; i++) {
+    context_position_labels_patterns.font = "20px sans-serif";
+    context_position_labels_patterns.fillStyle = 'rgba(170, 170, 170, 1)';
+    var label = i + 1;
+    context_position_labels_patterns.fillText(label, x, 35);
+    x += 112.5;
+}
+
+x = 0;
+
+for (var j = 0; j < 513; j++) {
+    context_grid_patterns.moveTo(x, 0);
+    context_grid_patterns.lineTo(x, 550);
+    //context_grid_patterns.strokeStyle = 'rgba(0, 44, 44, 1)';
+    context_grid_patterns.stroke();
+    x += 56.25;
+}
+
+for (var i = 0; i < 11; i++) {
+    context_grid_patterns.moveTo(0, y);
+    context_grid_patterns.lineTo(28800, y);
+    context_grid_patterns.strokeStyle = '#888';
+    context_grid_patterns.stroke();
+    y += 55;
+}
+
 var c_canvas_tracks_patterns = document.getElementById("tracks-patterns");
 var context_tracks_patterns = c_canvas_tracks_patterns.getContext("2d");
-var y = 0;
+y = 0;
 
 for (var i = 0; i < 10; i++) {
     context_tracks_patterns.beginPath();
@@ -43,6 +77,9 @@ for (var i = 0; i < 10; i++) {
     context_tracks_patterns.strokeStyle = 'black';
     context_tracks_patterns.stroke();
 
+    context_tracks_patterns.font = "20px sans-serif";
+    context_tracks_patterns.fillStyle = 'rgba(170, 170, 170, 1)';
+    context_tracks_patterns.fillText("Track " + (i + 1), 15, y + 33);
     y += 55;
 }
 
@@ -104,7 +141,7 @@ for (var i = 0; i < 3; i++) {
             context_keys.lineWidth = 1;
             context_keys.strokeStyle = 'black';
             context_keys.stroke();
-            context_labels.font = "20px Georgia";
+            context_labels.font = "20px sans-serif";
             context_labels.fillText(notelbls[j] + oct, 70, 22 + y);
             if (j == 4) {
                 oct--;
@@ -119,7 +156,7 @@ for (var i = 0; i < 3; i++) {
             context_keys.lineWidth = 1;
             context_keys.strokeStyle = 'black';
             context_keys.stroke();
-            context_labels.font = "20px Georgia";
+            context_labels.font = "20px sans-serif";
             context_labels.fillText(notelbls[j] + oct, 70, 22 + y);
             y += 40;
         }

@@ -4,15 +4,19 @@
   position: relative;
 }
 #app-song {
-    left: 610px;
-  width: 650px;
+    left: 48%;
+  width: 550px;
   height: 600px;
   position: absolute;
 }
 #all-patterns {
-  position: relative;
-  min-width: 550px;
-  max-width: 550px;
+    left: 100px;
+    top: 0px;
+  position: absolute;
+  width: 450px;
+  height: 625px;
+  max-width: 450px;
+  overflow: auto;
 }
 #content {
  position:relative;
@@ -285,29 +289,29 @@ label {
     color: rgba(170, 170, 170, 1);
 }
 #tracks-patterns {
-    position: relative;
+    position: absolute;
+    top: 55px;
     width: 100px; 
     height: 550px;
 }
 #colored-patterns {
     position: absolute;
-    width: 450px; 
+    width: 28800px; 
     height: 550px;
 }
 #grid-patterns {
     position: absolute;
-    width: 450px; 
+    width: 28800px; 
     height: 550px;
 }
 #pat-patterns {
     position: absolute;
-    width: 450px; 
+    width: 28800px; 
     height: 550px;
 }
 #position-labels-patterns {
     position: relative;
-    margin-left: 100px;
-    width: 450px; 
+    width: 28800px; 
     height: 50px;
 }
 #ifrmDrum {
