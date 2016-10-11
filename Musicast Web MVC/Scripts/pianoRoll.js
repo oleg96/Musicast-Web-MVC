@@ -48,30 +48,56 @@ for (var i = 0; i < 256; i++) {
 
 x = 0;
 
-for (var j = 0; j < 513; j++) {
-    context_grid_patterns.moveTo(x, 0);
-    context_grid_patterns.lineTo(x, 550);
-    //context_grid_patterns.strokeStyle = 'rgba(0, 44, 44, 1)';
-    context_grid_patterns.stroke();
-    x += 56.25;
-}
+var data = '<svg xmlns="http://www.w3.org/2000/svg" width="28800" height="551">' +
+        '<defs>' +
+            '<pattern id="smallGrid" width="7.03125" height="55" patternUnits="userSpaceOnUse">' +
+                '<path d="M 7.03125 0 L 0 0 0 55" fill="none" stroke="gray" stroke-width="2" />' +
+            '</pattern>' +
+            '<pattern id="grid" width="112.5" height="55" patternUnits="userSpaceOnUse">' +
+                '<rect width="112.5" height="55" fill="url(#smallGrid)" />' +
+                '<path d="M 112.5 0 L 0 0 0 55" fill="none" stroke="gray" stroke-width="3" />' +
+            '</pattern>' +
+        '</defs>' +
+        '<rect width="28800" height="551" fill="url(#smallGrid)" />' +
+    '</svg>';
 
-for (var i = 0; i < 11; i++) {
-    context_grid_patterns.moveTo(0, y);
-    context_grid_patterns.lineTo(28800, y);
-    context_grid_patterns.strokeStyle = '#888';
-    context_grid_patterns.stroke();
-    y += 55;
+var DOMURL = window.URL || window.webkitURL || window;
+
+var img = new Image();
+var svg = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+var url = DOMURL.createObjectURL(svg);
+
+img.onload = function () {
+    context_grid_patterns.drawImage(img, 0, 0);
+    DOMURL.revokeObjectURL(url);
 }
+img.src = url;
+
+//for (var j = 0; j < 513; j++) {
+//    context_grid_patterns.moveTo(x, 0);
+//    context_grid_patterns.lineTo(x, 550);
+//    //context_grid_patterns.strokeStyle = 'rgba(0, 44, 44, 1)';
+//    context_grid_patterns.stroke();
+//    x += 56.25;
+//}
+
+//for (var i = 0; i < 11; i++) {
+//    context_grid_patterns.moveTo(0, y);
+//    context_grid_patterns.lineTo(28800, y);
+//    context_grid_patterns.strokeStyle = '#888';
+//    context_grid_patterns.stroke();
+//    y += 55;
+//}
 
 var c_canvas_tracks_patterns = document.getElementById("tracks-patterns");
 var context_tracks_patterns = c_canvas_tracks_patterns.getContext("2d");
+
 y = 0;
 
 for (var i = 0; i < 10; i++) {
     context_tracks_patterns.beginPath();
     context_tracks_patterns.rect(0, y, 100, 55);
-    context_tracks_patterns.fillStyle = 'rgba(50, 75, 50, 1)';
+    context_tracks_patterns.fillStyle = "#222";
     context_tracks_patterns.fill();
     context_tracks_patterns.lineWidth = 1;
     context_tracks_patterns.strokeStyle = 'black';
@@ -80,6 +106,7 @@ for (var i = 0; i < 10; i++) {
     context_tracks_patterns.font = "20px sans-serif";
     context_tracks_patterns.fillStyle = 'rgba(170, 170, 170, 1)';
     context_tracks_patterns.fillText("Track " + (i + 1), 15, y + 33);
+    
     y += 55;
 }
 
