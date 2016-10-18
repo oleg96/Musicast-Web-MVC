@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MusicGenController.cs" />
     <Compile Include="Controllers\SequencerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -324,6 +325,7 @@
     <Content Include="Views\Sequencer\Sequencer.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\MusicGen\MusicGen.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
