@@ -5,16 +5,14 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="../Content/style.css">
 </head>
-<body style="background-image:url(../Images/1-temnaya-tekstura-kristalov.png)">
+<body class="body-style">
     <h2>Chat room</h2>
-
     <div class="main">
         <div id="loginBlock">
             Enter login:<br />
-            <input id="txtUserName" type="text" readonly/>
-            <input id="btnLogin" type="button" value="Login" />
+            <input class="inputBlackStyle" id="txtUserName" type="text" readonly />
+            <input class="inputBlackStyle" id="btnLogin" type="button" value="Login" />
         </div>
         <div id="chatBody">
             <div id="header"></div>
@@ -23,8 +21,21 @@
             </div>
             <div id="chatroom"></div>
             <div id="inputForm">
-                <input type="text" id="message" />
-                <input type="button" id="sendmessage" value="Send" />
+                <p id="typing"></p>
+                <input class="inputBlackStyle" type="text" id="message" />
+                <input class="inputBlackStyle" type="button" id="sendmessage" value="Send" />
+                <div id="smiles">
+                    <button class="button_smile" title="angry" onclick="angryClick()"><img class="smile" src="/Smiles/angry.ico" alt="angry" /></button>
+                    <button class="button_smile" title="checkmark" onclick="checkmarkClick()"><img class="smile" src="/Smiles/checkmark.ico" alt="checkmark" /></button>
+                    <button class="button_smile" title="cross" onclick="crossClick()"><img class="smile" src="/Smiles/cross.ico" alt="cross" /></button>
+                    <button class="button_smile" title="grin" onclick="grinClick()"><img class="smile" src="/Smiles/grin.ico" alt="grin" /></button>
+                    <button class="button_smile" title="love" onclick="loveClick()"><img class="smile" src="/Smiles/love.ico" alt="love" /></button>
+                    <button class="button_smile" title="point" onclick="pointClick()"><img class="smile" src="/Smiles/point.ico" alt="point" /></button>
+                    <button class="button_smile" title="sad" onclick="sadClick()"><img class="smile" src="/Smiles/sad.ico" alt="sad" /></button>
+                    <button class="button_smile" title="smile" onclick="smileClick()"><img class="smile" src="/Smiles/smile.ico" alt="smile" /></button>
+                    <button class="button_smile" title="thumbsup" onclick="thumbsupClick()"><img class="smile" src="/Smiles/thumbsup.ico" alt="thumbsup" /></button>
+                    <button class="button_smile" title="thumbsdown" onclick="thumbsdownClick()"><img class="smile" src="/Smiles/thumbsdown.ico" alt="thumbsdown" /></button>
+                </div>
             </div>
         </div>
         <input id="hdId" type="hidden" />
@@ -34,9 +45,9 @@
         var name = "@(User.Identity.Name)";
         $("#txtUserName").val(name);
     </script>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <!--Ссылка на библиотеку SignalR -->
-    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
     <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
     <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/util.js"></script>

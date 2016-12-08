@@ -9,10 +9,9 @@
     <meta name="viewport" content="width=device-width" />
     <link href="../Content/normalize.css" rel="stylesheet">
     <link href="../Content/MYXJGM.css" rel="stylesheet prefetch">
-    <link href="../content/style.css" rel="stylesheet">
     <title></title>
 </head>
-<body style="background-image:url(../Images/1-temnaya-tekstura-kristalov.png)">
+<body class="body-style">
     <div class="tabs">
         <input id="tab1" type="radio" name="tabs" checked>
         <label for="tab1" title="Synth 1">Synth 1</label>
@@ -23,29 +22,29 @@
         <input id="tab3" type="radio" name="tabs">
         <label for="tab3" title="Synth 3">Synth 3</label>
 
-        <section id="content1">
+        <section class="hide_tabs" id="content1">
             <iframe id="ifrmSynth1" src="../synth.htm" width="100%" style="height: 601px" frameborder=no></iframe>
         </section>
-        <section id="content2">
+        <section class="hide_tabs" id="content2">
             <iframe id="ifrmSynth2" src="../synth.htm" width="100%" style="height: 601px" frameborder=no></iframe>
         </section>
-        <section id="content3">
+        <section class="hide_tabs" id="content3">
             <iframe id="ifrmSynth3" src="../synth.htm" width="100%" style="height: 601px" frameborder=no></iframe>
         </section>
     </div>
 
     <div>
-    <div id="app-song">
-        <canvas id="tracks-patterns" width="100" height="550"></canvas>
-        <div id="all-patterns">
-            <canvas id="position-labels-patterns" width="28800" height="50"></canvas>
-            <canvas id="colored-patterns" width="28800" height="550"></canvas>
-            <canvas id="grid-patterns" width="28800" height="550"></canvas>
-            <canvas id="pat-patterns" width="28800" height="550"></canvas>
+        <div id="app-song">
+            <canvas id="tracks-patterns" width="100" height="550"></canvas>
+            <div id="all-patterns">
+                <canvas id="position-labels-patterns" width="28800" height="50"></canvas>
+                <canvas id="colored-patterns" width="28800" height="550"></canvas>
+                <canvas id="grid-patterns" width="28800" height="550"></canvas>
+                <canvas id="pat-patterns" width="28800" height="550"></canvas>
+            </div>
         </div>
-    </div>
 
-    <iframe id="ifrmDrum" src="../drum.html" style="height: 600px; width: 44%;" frameborder=no></iframe>
+        <iframe id="ifrmDrum" src="../drum.html" style="height: 600px; width: 44%;" frameborder=no></iframe>
     </div>
 
     <div class="app">
@@ -71,13 +70,13 @@
         </div>
     </div>
     @*<div id="content">
-        <div id="div-keyboard">
-            <img alt="" src="../Images/keyboard.png" style="width:56px; height:630px" />
-        </div>
-        <div id="div-pattern">
-        </div>
+            <div id="div-keyboard">
+                <img alt="" src="../Images/keyboard.png" style="width:56px; height:630px" />
+            </div>
+            <div id="div-pattern">
+            </div>
 
-    </div>*@
+        </div>*@
     <div id="roll_keyboard">
         <div id="keyboard">
             <canvas id="keys" width="100" height="700"></canvas>

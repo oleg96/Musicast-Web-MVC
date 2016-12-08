@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Musicast_Web_MVC.Models.Picture>
+@{
     ViewBag.Title = "MusicGen";
 }
 <!DOCTYPE html>
@@ -6,12 +7,64 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="../Content/normalize.css" rel="stylesheet">
-    <link href="../Content/MYXJGM.css" rel="stylesheet prefetch">
-    <link href="../content/style.css" rel="stylesheet">
+    <link href="~/Content/normalize.css" rel="stylesheet">
+    <link href="~/Content/MYXJGM.css" rel="stylesheet prefetch">
+    <link href="~/content/styleWhite.css" rel="stylesheet">
+    <script type="text/javascript" src="../Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/popup_img.js"></script>
     <title></title>
 </head>
-<body style="background-image:url(../Images/1-temnaya-tekstura-kristalov.png)">
-    
+<body class="body-style">
+    <h2>All pictures</h2>
+    @if (@User.Identity.Name != "")
+    {
+        <p>
+            @Html.ActionLink("Add picture", "Create")
+        </p>
+    }
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Name</th>
+            <th>Picture</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
+                                + Convert.ToBase64String(item.Image) + "\" />")
+                    
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <div class="module transport">
+                        <button class="transport-stop" style="width: 60px" title="Player" onclick="location.href='@Url.Action("Player", new { id = item.Id } )'">Player</button>
+                    </div>
+                </td>
+                @if (@User.Identity.Name == item.Owner)
+                {
+                    <td>
+                        <div class="module transport">
+                            <button class="transport-stop" title="Edit" onclick="location.href='@Url.Action("Edit", new { id = item.Id, owner = item.Owner } )'">Edit</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="module transport">
+                            <button class="transport-stop" style="width: 60px" title="Delete" onclick="location.href='@Url.Action("Delete", new { id = item.Id, owner = item.Owner } )'">Delete</button>
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
 </body>
 </html>

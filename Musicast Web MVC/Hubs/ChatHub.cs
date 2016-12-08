@@ -11,10 +11,49 @@ namespace Musicast_Web_MVC.Hubs
     {
         static List<User> Users = new List<User>();
 
+        MessageContext dbm = new MessageContext();
+
+        public void GetAllMessages()
+        {
+            foreach (Message msg in dbm.Messages)
+            {
+                string dateTime = DateTime.Parse(msg.DateTime.ToString()).ToString("dd.MM.yyyy H:mm:ss");
+                string messageWithSmiles = msg.UserMessage;
+                messageWithSmiles = messageWithSmiles.Replace("#angry", "<img class='smile' src='/Smiles/angry.ico' alt='angry' />");
+                messageWithSmiles = messageWithSmiles.Replace("#checkmark", "<img class='smile' src='/Smiles/checkmark.ico' alt='checkmark' />");
+                messageWithSmiles = messageWithSmiles.Replace("#cross", "<img class='smile' src='/Smiles/cross.ico' alt='cross' />");
+                messageWithSmiles = messageWithSmiles.Replace("#grin", "<img class='smile' src='/Smiles/grin.ico' alt='grin' />");
+                messageWithSmiles = messageWithSmiles.Replace("#love", "<img class='smile' src='/Smiles/love.ico' alt='love' />");
+                messageWithSmiles = messageWithSmiles.Replace("#point", "<img class='smile' src='/Smiles/point.ico' alt='point' />");
+                messageWithSmiles = messageWithSmiles.Replace("#sad", "<img class='smile' src='/Smiles/sad.ico' alt='sad' />");
+                messageWithSmiles = messageWithSmiles.Replace("#smile", "<img class='smile' src='/Smiles/smile.ico' alt='smile' />");
+                messageWithSmiles = messageWithSmiles.Replace("#thumbsup", "<img class='smile' src='/Smiles/thumbsup.ico' alt='thumbsup' />");
+                messageWithSmiles = messageWithSmiles.Replace("#thumbsdown", "<img class='smile' src='/Smiles/thumbsdown.ico' alt='thumbsdown' />");
+                Clients.Caller.addMessage(msg.Author, messageWithSmiles, dateTime);
+            }
+        }
         // Отправка сообщений
         public void Send(string name, string message)
         {
-            Clients.All.addMessage(name, message);
+            Message msg = new Message();
+            msg.Author = name;
+            msg.DateTime = DateTime.Now;
+            string messageWithSmiles = message;
+            messageWithSmiles = messageWithSmiles.Replace("#angry", "<img class='smile' src='/Smiles/angry.ico' alt='angry' />");
+            messageWithSmiles = messageWithSmiles.Replace("#checkmark", "<img class='smile' src='/Smiles/checkmark.ico' alt='checkmark' />");
+            messageWithSmiles = messageWithSmiles.Replace("#cross", "<img class='smile' src='/Smiles/cross.ico' alt='cross' />");
+            messageWithSmiles = messageWithSmiles.Replace("#grin", "<img class='smile' src='/Smiles/grin.ico' alt='grin' />");
+            messageWithSmiles = messageWithSmiles.Replace("#love", "<img class='smile' src='/Smiles/love.ico' alt='love' />");
+            messageWithSmiles = messageWithSmiles.Replace("#point", "<img class='smile' src='/Smiles/point.ico' alt='point' />");
+            messageWithSmiles = messageWithSmiles.Replace("#sad", "<img class='smile' src='/Smiles/sad.ico' alt='sad' />");
+            messageWithSmiles = messageWithSmiles.Replace("#smile", "<img class='smile' src='/Smiles/smile.ico' alt='smile' />");
+            messageWithSmiles = messageWithSmiles.Replace("#thumbsup", "<img class='smile' src='/Smiles/thumbsup.ico' alt='thumbsup' />");
+            messageWithSmiles = messageWithSmiles.Replace("#thumbsdown", "<img class='smile' src='/Smiles/thumbsdown.ico' alt='thumbsdown' />");
+            msg.UserMessage = messageWithSmiles;
+            dbm.Messages.Add(msg);
+            dbm.SaveChanges();
+            string nowDateTime = DateTime.Now.ToString("dd.MM.yyyy H:mm:ss");
+            Clients.All.addMessage(name, messageWithSmiles, nowDateTime);
         }
 
         // Подключение нового пользователя
@@ -32,6 +71,8 @@ namespace Musicast_Web_MVC.Hubs
 
                 // Посылаем сообщение всем пользователям, кроме текущего
                 Clients.AllExcept(id).onNewUserConnected(id, userName);
+
+                GetAllMessages();
             }
         }
 
@@ -47,6 +88,14 @@ namespace Musicast_Web_MVC.Hubs
             }
 
             return base.OnDisconnected(stopCalled);
+        }
+
+        // Typing event
+        public void Typing(string userName)
+        {
+            var id = Context.ConnectionId;
+            // Посылаем сообщение всем пользователям, кроме текущего
+            Clients.AllExcept(id).onTypingMessage(userName);
         }
     }
 }

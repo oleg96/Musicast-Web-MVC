@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – Musicast Web</title>
+    <link href="~/Content/styleWhite.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -35,7 +36,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="color:rgba(170, 170, 170, 1)">&copy; @DateTime.Now.Year – Musicast Web</p>
+            <p>&copy; @DateTime.Now.Year – Musicast Web</p>
         </footer>
     </div>
 

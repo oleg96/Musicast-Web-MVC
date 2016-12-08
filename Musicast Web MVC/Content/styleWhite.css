@@ -1,0 +1,418 @@
+﻿#app {
+  margin: 0 auto;
+  width: 500px;
+  position: relative;
+}
+#app-song {
+    left: 48%;
+  width: 620px;
+  height: 600px;
+  position: absolute;
+}
+#all-patterns {
+    left: 100px;
+    top: 0px;
+  position: absolute;
+  width: 550px;
+  height: 625px;
+  max-width: 520px;
+  overflow: auto;
+}
+#content {
+ position:relative;
+ height: 630px;
+ padding:0px;
+ margin:0px;
+}
+ 
+#div-pattern {
+ position:absolute;
+ top:0;
+ left:56px;
+ padding:0px;
+}
+ 
+#div-keyboard {
+ position:absolute;
+ top:0;
+ left:0;
+ width:56px;
+  margin:0px;
+}
+
+.pat {
+    width: 16px;
+    height:17px;
+    display:inline-block;
+    margin-left:1px;
+    background: rgba(86, 106, 95, 1);
+}
+
+.pat.active {
+    outline: 2px solid #fff; /* рамка */
+}
+
+.pat_active {
+    width: 16px;
+    height:17px;
+    display:inline-block;
+    margin-left:1px;
+    background: rgba(144, 122, 88, 1);
+}
+
+.seq_row {
+    margin:1px;
+    padding:1px;
+    height:17px;
+}
+.animation {
+    padding: 0px; 
+    margin: 0; 
+    overflow: hidden; 
+    height: 400px;
+}
+
+#r-head {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#r-head h3 {
+  margin-top: 0;
+}
+
+.presets {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.presets li {
+  display: inline-block;
+  border: 1px solid #111;
+}
+.presets a {
+  display: inline-block;
+  padding: 5px;
+  width: 200px;
+  border: 2px solid #333;
+  background: #222;
+  color: #555;
+  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+  -webkit-transition: border-color 0.3s ease,  background-color 0.3s ease, color 0.3s ease;
+  transition: border-color 0.3s ease,  background-color 0.3s ease, color 0.3s ease;
+}
+.presets a:hover {
+  background-color: #530;
+  border-color: #ff9900;
+}
+.presets a.active {
+  border-color: #99ccaa;
+  color: black;
+  -webkit-animation: focused 0.5s ease;
+          animation: focused 0.5s ease;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+.main {
+	color: black;
+}
+h1 {
+	color: black;
+}
+h2 {
+	color: black;
+}
+h3 {
+	color: black;
+}
+h4.intro {
+	color: black;
+	display: inline-block;
+}
+h4 {
+	color: black;
+}
+h5 {
+	color: black;
+}
+h6 {
+	color: black;
+}
+address {
+	color: black;
+}
+.form-group {
+	color: black;
+}
+#chatusers {
+	display: inline-block;
+	position: absolute;
+	right: 20%;
+}
+#chatroom {
+	display: block;
+	overflow: auto;
+	max-height: 450px;
+	width: 75%;
+}
+#header {
+	display: inline-block;
+}
+#inputForm {
+	display: block;
+}
+img.introimg {
+	width:40%;
+	height:30%;
+}
+p.message {
+	background: rgba(170, 170, 170, 0.25);
+}
+/* Базовый контейнер табов */
+.tabs {
+  min-width: 320px;
+  width: 945px;
+  padding: 0px;
+  margin: 0 auto; 
+}
+/* стили секций с содержанием */
+.hide_tabs {
+  display: none;
+}
+.tabs input {
+  display: none;
+}
+/* стили вкладок (табов) */
+.tabs label {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #555;
+  border: 2px solid #333;
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 3px 3px 0 0;
+}
+/* шрифт-иконки от Font Awesome в формате Unicode */
+.tabs label:before {
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+/* изменения стиля заголовков вкладок при наведении */
+.tabs label:hover {
+  color: black;
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: 0.5s;
+}
+/* стили для активной вкладки */
+.tabs input:checked + label {
+  color: black;
+  border-top: 2px solid #99ccaa;
+  border-left: 2px solid #99ccaa;
+  border-right: 2px solid #99ccaa;
+  border-bottom: 1px solid #808080;
+  transition-property: border-bottom, border-left, border-right, border-top;
+  transition-duration: 0.5s;
+  background: rgba(220, 220, 220, 0.5);
+}
+/* активация секций с помощью переключателя :checked */
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+  display: block;
+}
+/* медиа запросы для различных типов носителей */  
+@media screen and (max-width: 680px) {
+  .tabs label {
+    font-size: 0;
+  }
+ 
+  .tabs label:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .tabs label {
+    padding: 15px;
+  }
+}
+#roll_keyboard {
+    position: relative;
+    width: 996px; 
+    height: 700px;
+}
+#roll {
+    position: relative;
+    left: 100px;
+    height: 720px;
+    overflow: auto;
+}
+#keyboard {
+    position: absolute;
+    width: 100px; 
+    height: 700px;
+}
+#keys {
+    position: absolute;
+    width: 100px; 
+    height: 700px;
+}
+#note_labels {
+    position: absolute;
+    width: 100px; 
+    height: 700px;
+}
+#colored {
+    position: absolute;
+    height: 700px;
+}
+#grid {
+    position: absolute;
+    height: 700px;
+}
+#notes {
+    position: absolute;
+    height: 700px;
+}
+#indicator {
+    position: absolute;
+    height: 700px;
+}
+label {
+    color: black;
+}
+#tracks-patterns {
+    position: absolute;
+    top: 55px;
+    width: 100px; 
+    height: 550px;
+}
+#colored-patterns {
+    position: absolute;
+    width: 28800px; 
+    height: 550px;
+}
+#grid-patterns {
+    position: absolute;
+    width: 28800px; 
+    height: 550px;
+}
+#pat-patterns {
+    position: absolute;
+    width: 28800px; 
+    height: 550px;
+}
+#position-labels-patterns {
+    position: relative;
+    width: 28800px; 
+    height: 50px;
+}
+#ifrmDrum {
+    position: relative;
+}
+legend {
+    color: black;
+}
+.editor-label {
+    padding: 2px;
+    color: black;
+}
+.editor-field {
+    padding: 2px;
+}
+#Author {
+    width: 100%;
+}
+#Name {
+    width: 100%;
+}
+#Description {
+    width: 100%;
+}
+a {
+    color: black;
+}
+th {
+    min-width: 80px;
+    height: 50px;  
+    color: black;
+    padding-left: 15px;
+}
+td {
+    color: black;
+    padding: 7px;
+}
+.image {
+    cursor: zoom-in;
+    width: 100%; /* you can use % */
+    height: auto;
+}
+.inputBlackStyle {
+    color: black;
+}
+dl, dt, dd {
+    color: black;
+}
+
+.popup {
+	position: fixed;
+	height:100%;
+	width:100%;
+	top:35px;
+	left:0;
+	display:none;
+	text-align:center;
+}
+
+.popup_bg {
+    cursor: zoom-out;
+	background:rgba(0,0,0,0.4);
+	position:absolute;
+	z-index:1;
+	height:100%;
+	width:100%;
+}
+
+
+.popup_img {
+	position: relative;
+	margin:0 auto;
+	z-index:2;
+	max-height:94%;
+	max-width:94%;
+	margin:1% 0 0 0;
+}
+
+.body-style {
+    background-image: url(../Images/dot_white_purple.jpg);
+}
+
+.navbar-inverse {
+    background-image: url(../Images/head.jpg);
+}
+
+img.smile {
+    margin: 2px;
+    height: 18px;
+    width: 18px;
+}
+
+button.button_smile {
+    width: 24px;
+    height: 24px;
+    border: none;
+    padding: 0;
+    background-color: rgba(0,0,0,0);
+}
+
+#message {
+    width: 100%;
+}

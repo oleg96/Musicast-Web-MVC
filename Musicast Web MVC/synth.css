@@ -59,6 +59,7 @@ h3 {
 }
 
 label {
+    color: #cccccc;
     display: block;
     clear: both;
     position: relative;
@@ -132,7 +133,7 @@ select {
 .oscillators {
     height: 162px;
     width: 690px;
-    background: rgba(158, 158, 158, 0.85);
+    background-image: url(../Images/1-fon-dlya-sayta1.png);
     border-radius: 2px 0 0 0;
     float: left;
 }
@@ -148,7 +149,7 @@ select {
 }
 
 .filter {
-    background: rgba(158,158,158,0.85);
+    background-image: url(../Images/1-fon-dlya-sayta1.png);
     border-top: none;
     height: 190px;
     width: 425px;
@@ -156,7 +157,7 @@ select {
 }
 
 .lfo {
-    background: rgba(158,158,158,0.85);
+    background-image: url(../Images/1-fon-dlya-sayta1.png);
     border-radius: 0 2px 0 0;
     width: 150px;
     height: 162px;
@@ -165,7 +166,7 @@ select {
 }
 
 .volume-filter {
-    background: rgba(158,158,158,0.85);
+    background-image: url(../Images/1-fon-dlya-sayta1.png);
     height: 190px;
     width: 229px;
     float: left;
@@ -214,7 +215,7 @@ select {
 }
 
 .noise {
-    background: rgba(158,158,158,0.85);
+    background-image: url(../Images/1-fon-dlya-sayta1.png);
     border-top: none;
     display: inline-block;
     width: 150px;
@@ -223,7 +224,7 @@ select {
 }
 
 .output {
-    background: rgba(158,158,158,0.85);
+    background-image: url(../Images/1-fon-dlya-sayta1.png);
     border-top: none;
     display: inline-block;
     width: 150px;

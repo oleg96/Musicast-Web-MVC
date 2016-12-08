@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Register";
 }
-<body style="background-image:url(../Images/1-temnaya-tekstura-kristalov.png)">
-    <link rel="stylesheet" href="../Content/style.css">
+<body class="body-style">
     <h2>@ViewBag.Title.</h2>
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
@@ -35,7 +34,7 @@
             </div>
         </div>
     }
-    </body>
+</body>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }

@@ -4,10 +4,10 @@ $(function () {
     // Ссылка на автоматически-сгенерированный прокси хаба
     var chat = $.connection.chatHub;
     // Объявление функции, которая хаб вызывает при получении сообщений
-    chat.client.addMessage = function (name, message) {
+    chat.client.addMessage = function (name, message, date) {
         // Добавление сообщений на веб-страницу 
         $('#chatroom').append('<p class="message"><b>' + htmlEncode(name)
-            + '</b>: ' + htmlEncode(message) + '</p>');
+            + '</b> at ' + htmlEncode(date) + ': ' + message + '</p>');
         var chatmsglist = document.getElementById('chatroom');
         chatmsglist.scrollTop = 9999;
     };
@@ -41,8 +41,22 @@ $(function () {
         $('#' + id).remove();
     }
 
+    var timeout;
+    // Display typing
+    chat.client.onTypingMessage = function (userName) {
+        clearTimeout(timeout);
+        $('#typing').text(userName + " typing a message...");
+        timeout = setTimeout(function () {
+            clearTyping();
+        }, 3000);
+    }
+
     // Открываем соединение
     $.connection.hub.start().done(function () {
+
+        jQuery('#message').on('input', function () {
+            chat.server.typing($('#username').val());
+        });
 
         $('#sendmessage').click(function () {
             // Вызываем у хаба метод Send
@@ -63,6 +77,11 @@ $(function () {
         });
     });
 });
+
+function clearTyping() {
+    $('#typing').text("");
+}
+
 // Кодирование тегов
 function htmlEncode(value) {
     var encodedValue = $('<div />').text(value).html();
@@ -77,4 +96,35 @@ function AddUser(id, name) {
 
         $("#chatusers").append('<p id="' + id + '"><b>' + name + '</b></p>');
     }
+}
+
+function angryClick() {
+    $('#message').val($('#message').val()+"#angry");
+}
+function checkmarkClick() {
+    $('#message').val($('#message').val() + "#checkmark");
+}
+function crossClick() {
+    $('#message').val($('#message').val() + "#cross");
+}
+function grinClick() {
+    $('#message').val($('#message').val() + "#grin");
+}
+function loveClick() {
+    $('#message').val($('#message').val() + "#love");
+}
+function pointClick() {
+    $('#message').val($('#message').val() + "#point");
+}
+function sadClick() {
+    $('#message').val($('#message').val() + "#sad");
+}
+function smileClick() {
+    $('#message').val($('#message').val() + "#smile");
+}
+function thumbsdownClick() {
+    $('#message').val($('#message').val() + "#thumbsdown");
+}
+function thumbsupClick() {
+    $('#message').val($('#message').val() + "#thumbsup");
 }

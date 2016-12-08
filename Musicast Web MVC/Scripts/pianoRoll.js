@@ -40,7 +40,7 @@ var y = 0;
 
 for (var i = 0; i < 256; i++) {
     context_position_labels_patterns.font = "20px sans-serif";
-    context_position_labels_patterns.fillStyle = 'rgba(170, 170, 170, 1)';
+    context_position_labels_patterns.fillStyle = 'black';
     var label = i + 1;
     context_position_labels_patterns.fillText(label, x, 35);
     x += 112.5;
@@ -72,22 +72,6 @@ img.onload = function () {
     DOMURL.revokeObjectURL(url);
 }
 img.src = url;
-
-//for (var j = 0; j < 513; j++) {
-//    context_grid_patterns.moveTo(x, 0);
-//    context_grid_patterns.lineTo(x, 550);
-//    //context_grid_patterns.strokeStyle = 'rgba(0, 44, 44, 1)';
-//    context_grid_patterns.stroke();
-//    x += 56.25;
-//}
-
-//for (var i = 0; i < 11; i++) {
-//    context_grid_patterns.moveTo(0, y);
-//    context_grid_patterns.lineTo(28800, y);
-//    context_grid_patterns.strokeStyle = '#888';
-//    context_grid_patterns.stroke();
-//    y += 55;
-//}
 
 var c_canvas_tracks_patterns = document.getElementById("tracks-patterns");
 var context_tracks_patterns = c_canvas_tracks_patterns.getContext("2d");
@@ -159,7 +143,6 @@ var y = 0;
 oct = 6;
 for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 7; j++) {
-        //context_notes.fillRect(notes[i][0], notes[i][1], notes[i][2], 20);
         if ((j == 0 && i == 0) || j == 1 || j == 2 || j == 4 || j == 5) {
             context_keys.beginPath();
             context_keys.rect(0, y, 100, 30);
@@ -192,7 +175,6 @@ for (var i = 0; i < 3; i++) {
 var y = 0;
 for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 12; j++) {
-        //context_notes.fillRect(notes[i][0], notes[i][1], notes[i][2], 20);
         if (j == 1 || j == 4 || j == 6 || j == 9 || (j == 11 && i != 2)) {
             context_keys.beginPath();
             context_keys.rect(0, y, 65, 20);
@@ -313,15 +295,8 @@ function isExistPosition(position, note, i) {
 }
 
 function refreshPianoRoll() {
-    //for (var x = 0; x * 14 <= 896; x++) {
-    //    for (var y = 0; y * 20 <= 700; y++) {
-    //        context_notes.clearRect(x * 14, y * 20, 14, 20);
-    //    }
-    //}
     context_notes.clearRect(0, 0, c_canvas_notes.width, c_canvas_notes.height);
-    //context_notes.fillStyle = "rgb(255,255,255)";
     for (var i = 0; i < notes.length; i++) {
-        //context_notes.fillRect(notes[i][0], notes[i][1], notes[i][2], 20);
         context_notes.beginPath();
         context_notes.rect(notes[i][0], notes[i][1], notes[i][2], 20);
         context_notes.fillStyle = '#7c8';
@@ -351,23 +326,6 @@ $("#notes").click(function (e) {
         }
     }
     else {
-
-            //if (document.getElementById('1/16').checked && document.getElementById('remove').checked) {
-            //    context_notes.clearRect(x * 14, y * 20, 14, 20);
-            //}
-            //if (document.getElementById('1/8').checked && document.getElementById('remove').checked) {
-            //    context_notes.clearRect(x * 14, y * 20, 28, 20);
-            //}
-            //if (document.getElementById('1/4').checked && document.getElementById('remove').checked) {
-            //    context_notes.clearRect(x * 14, y * 20, 56, 20);
-            //}
-            //if (document.getElementById('1/2').checked && document.getElementById('remove').checked) {
-            //    context_notes.clearRect(x * 14, y * 20, 112, 20);
-            //}
-            //if (document.getElementById('1/1').checked && document.getElementById('remove').checked) {
-            //    context_notes.clearRect(x * 14, y * 20, 224, 20);
-            //}
-
         if (document.getElementById('1/16').checked && document.getElementById('add').checked) {
             var position = x * 14;
             var note = y * 20;

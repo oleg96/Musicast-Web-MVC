@@ -179,7 +179,7 @@ p.message {
   margin: 0 auto; 
 }
 /* стили секций с содержанием */
-section {
+.hide_tabs {
   display: none;
 }
 .tabs input {
@@ -252,8 +252,8 @@ section {
 #roll {
     position: relative;
     left: 100px;
-    width: 896px; 
-    height: 700px;
+    height: 720px;
+    overflow: auto;
 }
 #keyboard {
     position: absolute;
@@ -272,17 +272,14 @@ section {
 }
 #colored {
     position: absolute;
-    width: 896px; 
     height: 700px;
 }
 #grid {
     position: absolute;
-    width: 896px; 
     height: 700px;
 }
 #notes {
     position: absolute;
-    width: 896px; 
     height: 700px;
 }
 label {
@@ -316,4 +313,82 @@ label {
 }
 #ifrmDrum {
     position: relative;
+}
+legend {
+    color: rgba(170, 170, 170, 1);
+}
+.editor-label {
+    padding: 2px;
+    color: rgba(170, 170, 170, 1);
+}
+.editor-field {
+    padding: 2px;
+}
+#Author {
+    width: 100%;
+}
+#Name {
+    width: 100%;
+}
+#Description {
+    width: 100%;
+}
+a {
+    color: rgba(170, 170, 170, 1);
+}
+th {
+    min-width: 80px;
+    height: 50px;  
+    color: rgba(170, 170, 170, 1);
+    padding-left: 15px;
+}
+td {
+    color: rgba(170, 170, 170, 1);
+    padding: 7px;
+}
+.image {
+    cursor: zoom-in;
+    width: 100%; /* you can use % */
+    height: auto;
+}
+.inputBlackStyle {
+    color: black;
+}
+dl, dt, dd {
+    color: rgba(170, 170, 170, 1);
+}
+
+.popup {
+	position: fixed;
+	height:100%;
+	width:100%;
+	top:35px;
+	left:0;
+	display:none;
+	text-align:center;
+}
+
+.popup_bg {
+    cursor: zoom-out;
+	background:rgba(0,0,0,0.4);
+	position:absolute;
+	z-index:1;
+	height:100%;
+	width:100%;
+}
+
+
+.popup_img {
+	position: relative;
+	margin:0 auto;
+	z-index:2;
+	max-height:94%;
+	max-width:94%;
+	margin:1% 0 0 0;
+}
+.body-style {
+    background-image: url(../Images/7-fon-dlya-sayta.png);
+}
+.navbar-inverse {
+    background-image: url(../Images/1-fon-dlya-sayta.png);
 }

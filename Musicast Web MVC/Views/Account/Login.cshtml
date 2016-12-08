@@ -1,10 +1,9 @@
 ﻿@using Musicast_Web_MVC.Models
-@model LoginViewModel
+@model Musicast_Web_MVC.Models.LoginViewModel
 @{
     ViewBag.Title = "Log in";
 }
-<body style="background-image:url(../Images/1-temnaya-tekstura-kristalov.png)">
-    <link rel="stylesheet" href="../Content/style.css">
+<body class="body-style">
     <h2>@ViewBag.Title.</h2>
     <div class="row">
         <div class="col-md-8">
@@ -58,7 +57,7 @@
             </section>
         </div>
     </div>
-    </body>
+</body>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
