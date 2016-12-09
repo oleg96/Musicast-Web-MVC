@@ -18,53 +18,43 @@
     <h2>All pictures</h2>
     @if (@User.Identity.Name != "")
     {
-        <p>
-            @Html.ActionLink("Add picture", "Create")
-        </p>
+        <div class="col-xs-0">
+            <a href="@Url.Action("Create")" class="btn btn-success" role="button">Add picture</a>
+        </div>
+        <p></p>
     }
-    <table>
+    <table class="table table-responsive">
         <tr>
             <th>Author</th>
             <th>Name</th>
             <th>Picture</th>
+            <th></th>
         </tr>
-
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="col-xs-1">
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
-                <td>
+                <td class="col-xs-1">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="col-xs-7">
                     @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
                                 + Convert.ToBase64String(item.Image) + "\" />")
                     
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
-                    <div class="module transport">
-                        <button class="transport-stop" style="width: 60px" title="Player" onclick="location.href='@Url.Action("Player", new { id = item.Id } )'">Player</button>
-                    </div>
+                <td class="col-xs-1">
+                    <a href="@Url.Action("Player", new { id = item.Id } )" class="btn btn-primary buttonMargin" role="button">Player</a>
+                    @if (@User.Identity.Name == item.Owner)
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Id, owner = item.Owner } )" class="btn btn-warning buttonMargin" role="button">Edit</a>
+                        <a href="@Url.Action("Delete", new { id = item.Id, owner = item.Owner } )" class="btn btn-danger buttonMargin" role="button">Delete</a>
+                    }
                 </td>
-                @if (@User.Identity.Name == item.Owner)
-                {
-                    <td>
-                        <div class="module transport">
-                            <button class="transport-stop" title="Edit" onclick="location.href='@Url.Action("Edit", new { id = item.Id, owner = item.Owner } )'">Edit</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="module transport">
-                            <button class="transport-stop" style="width: 60px" title="Delete" onclick="location.href='@Url.Action("Delete", new { id = item.Id, owner = item.Owner } )'">Delete</button>
-                        </div>
-                    </td>
-                }
             </tr>
         }
-
     </table>
 </body>
 </html>

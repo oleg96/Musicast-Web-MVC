@@ -8,22 +8,22 @@
 </head>
 <body class="body-style">
     <h2>Chat room</h2>
-    <div class="main">
-        <div id="loginBlock">
+    <div class="main row">
+        <div class="col-xs-12" id="loginBlock">
             Enter login:<br />
             <input class="inputBlackStyle" id="txtUserName" type="text" readonly />
-            <input class="inputBlackStyle" id="btnLogin" type="button" value="Login" />
+            <input class="btn btn-primary" id="btnLogin" type="button" value="Login" />
         </div>
         <div id="chatBody">
-            <div id="header"></div>
-            <div id="chatusers">
+            <div class="col-md-9" id="header"></div>
+            <div class="col-md-3" id="chatusers">
                 <p><b>All users</b></p>
             </div>
-            <div id="chatroom"></div>
-            <div id="inputForm">
+            <div class="col-md-9" id="chatroom"></div>
+            <div class="col-md-9" id="inputForm">
                 <p id="typing"></p>
                 <input class="inputBlackStyle" type="text" id="message" />
-                <input class="inputBlackStyle" type="button" id="sendmessage" value="Send" />
+                <input class="btn btn-primary" type="button" id="sendmessage" value="Send" />
                 <div id="smiles">
                     <button class="button_smile" title="angry" onclick="angryClick()"><img class="smile" src="/Smiles/angry.ico" alt="angry" /></button>
                     <button class="button_smile" title="checkmark" onclick="checkmarkClick()"><img class="smile" src="/Smiles/checkmark.ico" alt="checkmark" /></button>

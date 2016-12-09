@@ -14,30 +14,21 @@
 <body class="body-style">
     <input id="notesHidden" type="hidden" value=@Model.Song />
     <h2>Player</h2>
-    <dl>
-        <dt>Author</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+        <label>Author</label>
+        <p>@Html.DisplayFor(model => model.Author)</p>
 
-        <dt>Name</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <label>Name</label>
+        <p>@Html.DisplayFor(model => model.Name)</p>
 
-        <dt>Picture</dt>
-        <dd>
+        <label>Picture</label>
+        <p>
             @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
                                 + Convert.ToBase64String(Model.Image) + "\" />")
             @Html.DisplayFor(model => model.Description)
-        </dd>
+        </p>
 
-        <dt>Key</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Key)
-        </dd>
-
-    </dl>
+        <label>Key</label>
+        <p>@Html.DisplayFor(model => model.Key)</p>
     <div class="app">
         <div class="app-region" id="r-top">
             <div class="module transport">
@@ -53,7 +44,7 @@
             <canvas id="keys" width="100" height="700"></canvas>
             <canvas id="note_labels" width="100" height="700"></canvas>
         </div>
-        <div id="roll">
+        <div class="col-xs-9" id="roll">
             <canvas id="colored" height="700"></canvas>
             <canvas id="grid" height="700"></canvas>
             <canvas id="notes" height="700"></canvas>
@@ -67,9 +58,6 @@
         refreshPianoRoll();
         loadSoundFiles();
     </script>
-    <div class="editor-field">
-        @Html.ActionLink("Return to list", "MusicGen")
-    </div>
 </body>
 </html>
 @section Scripts {

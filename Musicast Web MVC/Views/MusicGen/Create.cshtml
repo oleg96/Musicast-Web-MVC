@@ -13,40 +13,41 @@
     @using (Html.BeginForm("Create", "MusicGen", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.ValidationSummary(true)
-        <fieldset>
-            <legend>Add picture</legend>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Add picture</div>
+            <div class="innerPanel">
+                <label>Author</label>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Author)
+                    @Html.ValidationMessageFor(model => model.Author)
+                </div>
 
-            <div class="editor-label">Author</div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Author)
-                @Html.ValidationMessageFor(model => model.Author)
+                <label>Name</label>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+
+                <label>Description</label>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+                <label>Picture file</label>
+                <div class="editor-field">
+                    <input type="file" class="btn btn-default" name="uploadImage" />
+                </div>
+
+                <p class="editor-field">
+                    <input type="submit" class="btn btn-success" value="Add" />
+                </p>
             </div>
-
-            <div class="editor-label">Name</div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-
-            <div class="editor-label">Description</div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-
-            <div class="editor-label">Picture file</div>
-            <div class="editor-field">
-                <input type="file" name="uploadImage" />
-            </div>
-
-            <p class="editor-field">
-                <input type="submit" value="Add" />
-            </p>
-        </fieldset>
+        </div>
     }
 
-    <div class="editor-field">
-        @Html.ActionLink("Return to list", "MusicGen")
+    <div class="col-xs-0">
+        <a href="@Url.Action("MusicGen")" class="btn btn-primary" role="button">Return to list</a>
     </div>
 </body>
 </html>

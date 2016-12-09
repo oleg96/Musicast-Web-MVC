@@ -7,42 +7,38 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/normalize.css" rel="stylesheet">
     <link href="~/Content/MYXJGM.css" rel="stylesheet prefetch">
+    <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/popup_img.js"></script>
     <title></title>
 </head>
 <body class="body-style">
-    <h2>Delete picture</h2>
-    <dl>
-        <dt>Author</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Delete picture</div>
+        <div class="innerPanel">
+            <label>Author</label>
+            <p>@Html.DisplayFor(model => model.Author)</p>
 
-        <dt>Name</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <label>Name</label>
+            <p>@Html.DisplayFor(model => model.Name)</p>
 
-        <dt>Picture</dt>
-        <dd>
-            @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
-                                + Convert.ToBase64String(Model.Image) + "\" />")
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <label>Picture</label>
+            <p>
+                @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
+                + Convert.ToBase64String(Model.Image) + "\" />")
+                @Html.DisplayFor(model => model.Description)
+            </p>
 
-        <dt>Key</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Key)
-        </dd>
-    </dl>
+            <label>Key</label>
+            <p>@Html.DisplayFor(model => model.Key)</p>
 
-    @using (Html.BeginForm())
-    {
-        <input type="submit" value="Delete" />
-    }
-
-    <div class="editor-field">
-        @Html.ActionLink("Return to list", "MusicGen")
+            @using (Html.BeginForm())
+            {
+                <input type="submit" class="btn btn-danger" value="Delete" />
+            }
+        </div>
     </div>
+
+        <a href="@Url.Action("MusicGen")" class="btn btn-primary" role="button">Return to list</a>
 </body>
 </html>
 @section Scripts {

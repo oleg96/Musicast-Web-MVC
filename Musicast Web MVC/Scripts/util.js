@@ -72,7 +72,7 @@ $(function () {
                 chat.server.connect(name);
             }
             else {
-                alert("Enter name");
+                alert("Register or sign in to use chat");
             }
         });
     });
