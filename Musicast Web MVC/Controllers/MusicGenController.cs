@@ -474,11 +474,13 @@ namespace Musicast_Web_MVC.Controllers
             return note;
         }
 
+        [Authorize(Roles = "Admin, Moderator, User")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Moderator, User")]
         [HttpPost]
         public ActionResult Create(Picture pic, HttpPostedFileBase uploadImage)
         {
@@ -501,6 +503,7 @@ namespace Musicast_Web_MVC.Controllers
             return View(pic);
         }
 
+        [Authorize(Roles = "Admin, Moderator, User")]
         [HttpGet]
         public ActionResult Edit(int? id, string owner)
         {
@@ -509,13 +512,21 @@ namespace Musicast_Web_MVC.Controllers
                 return HttpNotFound();
             }
             Picture picture = db.Pictures.Find(id);
-            if (picture != null && picture.Owner == owner)
+            if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                if (picture != null && picture.Owner == owner)
+                {
+                    return View(picture);
+                }
+            }
+            else if (picture != null && picture.Owner == owner && owner == User.Identity.Name)
             {
                 return View(picture);
             }
             return HttpNotFound();
         }
 
+        [Authorize(Roles = "Admin, Moderator, User")]
         [HttpPost]
         public ActionResult Edit(Picture pic, HttpPostedFileBase uploadImage)
         {
@@ -529,7 +540,10 @@ namespace Musicast_Web_MVC.Controllers
                 }
                 // установка массива байтов
                 pic.Image = imageData;
-                pic.Owner = User.Identity.Name;
+                if (User.IsInRole("User"))
+                {
+                    pic.Owner = User.Identity.Name;
+                }
                 db.Entry(pic).State = EntityState.Modified;
                 db.SaveChanges();
                 GenerateMusic(pic);
@@ -538,6 +552,7 @@ namespace Musicast_Web_MVC.Controllers
             return View(pic);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Delete(int id, string owner)
         {
@@ -549,6 +564,7 @@ namespace Musicast_Web_MVC.Controllers
             return View(picture);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id, string owner)
         {

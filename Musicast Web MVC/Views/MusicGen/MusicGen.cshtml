@@ -50,7 +50,15 @@
                     @if (@User.Identity.Name == item.Owner)
                     {
                         <a href="@Url.Action("Edit", new { id = item.Id, owner = item.Owner } )" class="btn btn-warning buttonMargin" role="button">Edit</a>
-                        <a href="@Url.Action("Delete", new { id = item.Id, owner = item.Owner } )" class="btn btn-danger buttonMargin" role="button">Delete</a>
+                    }
+                    @if (@User.IsInRole("Moderator"))
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Id, owner = item.Owner } )" class="btn btn-warning buttonMargin" role="button">Edit</a>
+                    }
+                    @if (@User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Id, owner = item.Owner } )" class="btn btn-warning buttonMargin" role="button">Edit</a>
+                        <a href="@Url.Action("Delete", new { id = item.Id, owner = item.Owner })" class="btn btn-danger buttonMargin" role="button">Delete</a>
                     }
                 </td>
             </tr>

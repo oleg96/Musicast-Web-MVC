@@ -60,8 +60,10 @@ $(function () {
 
         $('#sendmessage').click(function () {
             // Вызываем у хаба метод Send
-            chat.server.send($('#username').val(), $('#message').val());
-            $('#message').val('');
+            if ($('#message').val() != '') {
+                chat.server.send($('#username').val(), $('#message').val());
+                $('#message').val('');
+            }
         });
 
         // обработка логина

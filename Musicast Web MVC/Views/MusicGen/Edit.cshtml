@@ -34,6 +34,14 @@
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
 
+                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    <label>Owner</label>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Owner, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                }
+
                 <label>Picture file</label>
                 <div class="editor-field">
                     <input type="file" class="btn btn-default" name="uploadImage" />
