@@ -15,5 +15,11 @@ namespace Musicast_Web_MVC.Models
         public string Owner { set; get; }
         public string Key { set; get; }
         public string Song { set; get; }
+        public string Status { set; get; }
+        public AllStatuses NewStatus { set; get; }
+    }
+    public enum AllStatuses
+    {
+        Confirmed, Waiting, Banned
     }
 }

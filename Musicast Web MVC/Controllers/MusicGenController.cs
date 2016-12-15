@@ -495,6 +495,14 @@ namespace Musicast_Web_MVC.Controllers
                 // установка массива байтов
                 pic.Image = imageData;
                 pic.Owner = User.Identity.Name;
+                if (User.IsInRole("User"))
+                {
+                    pic.Status = "Waiting";
+                }
+                else
+                {
+                    pic.Status = "Confirmed";
+                }
                 db.Pictures.Add(pic);
                 db.SaveChanges();
                 GenerateMusic(pic);
@@ -532,21 +540,52 @@ namespace Musicast_Web_MVC.Controllers
         {
             if (ModelState.IsValid && uploadImage != null)
             {
-                byte[] imageData = null;
-                // считываем переданный файл в массив байтов
-                using (var binaryReader = new BinaryReader(uploadImage.InputStream))
-                {
-                    imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
-                }
-                // установка массива байтов
-                pic.Image = imageData;
                 if (User.IsInRole("User"))
                 {
+                    byte[] imageData = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                    {
+                        imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+                    }
+                    // установка массива байтов
+                    pic.Image = imageData;
                     pic.Owner = User.Identity.Name;
+                    pic.Status = "Waiting";
+                }
+                else
+                {
+                    byte[] imageData = null;
+                    // считываем переданный файл в массив байтов
+                    using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                    {
+                        imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+                    }
+                    // установка массива байтов
+                    pic.Image = imageData;
+                    pic.Status = pic.NewStatus.ToString();
                 }
                 db.Entry(pic).State = EntityState.Modified;
                 db.SaveChanges();
                 GenerateMusic(pic);
+                return RedirectToAction("MusicGen");
+            }
+            else if (ModelState.IsValid && uploadImage == null)
+            {
+                if (User.IsInRole("User"))
+                {
+                    pic.Status = "Waiting";
+                }
+                else
+                {
+                    pic.Status = pic.NewStatus.ToString();
+                }
+                db.Entry(pic).State = EntityState.Modified;
+                db.Entry(pic).Property(x => x.Owner).IsModified = false;
+                db.Entry(pic).Property(x => x.Image).IsModified = false;
+                db.Entry(pic).Property(x => x.Key).IsModified = false;
+                db.Entry(pic).Property(x => x.Song).IsModified = false;
+                db.SaveChanges();
                 return RedirectToAction("MusicGen");
             }
             return View(pic);

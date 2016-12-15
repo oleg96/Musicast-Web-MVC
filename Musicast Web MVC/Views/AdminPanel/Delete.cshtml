@@ -1,0 +1,39 @@
+﻿@model Musicast_Web_MVC.Models.UserInfoModel
+@{
+    ViewBag.Title = "Delete account";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/normalize.css" rel="stylesheet">
+    <link href="~/Content/MYXJGM.css" rel="stylesheet prefetch">
+    <title></title>
+</head>
+<body class="body-style">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Delete account</div>
+            <div class="innerPanel">
+            <label>Username</label>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <label>Role</label>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Role, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                <input type="submit" class="btn btn-danger" value="Delete" />
+            }
+        </div>
+    </div>
+    <div class="col-xs-0">
+        <a href="@Url.Action("AdminPanel")" class="btn btn-primary" role="button">Return to admin panel</a>
+    </div>
+</body>
+</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

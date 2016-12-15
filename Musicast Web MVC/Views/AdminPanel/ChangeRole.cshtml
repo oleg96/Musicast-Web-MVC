@@ -1,0 +1,48 @@
+﻿@model Musicast_Web_MVC.Models.UserInfoModel
+@{
+    ViewBag.Title = "Change role";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/normalize.css" rel="stylesheet">
+    <link href="~/Content/MYXJGM.css" rel="stylesheet prefetch">
+    <title></title>
+</head>
+<body class="body-style">
+    @using (Html.BeginForm("ChangeRole", "AdminPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        <div class="panel panel-primary">
+            <div class="panel-heading">Change user`s role</div>
+            <div class="innerPanel">
+                <label>Username</label>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+
+                <label>Current role</label>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Role, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+
+                <label>New role</label>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.NewRole,
+                    new SelectList(Enum.GetValues(typeof(Musicast_Web_MVC.Models.AllRoles))))
+                </div>
+
+                <p class="editor-field">
+                    <input type="submit" class="btn btn-warning" value="Change" />
+                </p>
+            </div>
+        </div>
+    }
+    <div class="col-xs-0">
+        <a href="@Url.Action("AdminPanel")" class="btn btn-primary" role="button">Return to admin panel</a>
+    </div>
+</body>
+</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

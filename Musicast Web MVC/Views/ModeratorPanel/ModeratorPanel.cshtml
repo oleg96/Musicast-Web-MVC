@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Musicast_Web_MVC.Models.Picture>
+@{
+    ViewBag.Title = "Moderator Panel";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/normalize.css" rel="stylesheet">
+    <link href="~/Content/styleWhite.css" rel="stylesheet">
+    <link href="~/Content/MYXJGM.css" rel="stylesheet prefetch">
+    <script type="text/javascript" src="../Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/popup_img.js"></script>
+    <title></title>
+</head>
+<body class="body-style">
+    <h2>Moderator Panel</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#picturescontrol">Pictures control</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="picturescontrol" class="tab-pane fade in active">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#waiting">Waiting pictures</a></li>
+                <li><a data-toggle="tab" href="#banned">Banned pictures</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="waiting" class="tab-pane fade in active">
+                    <h3>Waiting pictures</h3>
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>Author</th>
+                            <th>Name</th>
+                            <th>Picture</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Status == "Waiting")
+                            {
+                                <tr>
+                                    <td class="col-xs-1">
+                                        @Html.DisplayFor(modelItem => item.Author)
+                                    </td>
+                                    <td class="col-xs-1">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td class="col-xs-7">
+                                        @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td class="col-xs-1">
+                                        <a href="@Url.Action("Player", "MusicGen", new { id = item.Id })" class="btn btn-primary buttonMargin" role="button">Player</a>
+                                        <a href="@Url.Action("Edit", "MusicGen", new { id = item.Id, owner = item.Owner })" class="btn btn-warning buttonMargin" role="button">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+                <div id="banned" class="tab-pane fade">
+                    <h3>Banned pictures</h3>
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>Author</th>
+                            <th>Name</th>
+                            <th>Picture</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Status == "Banned")
+                            {
+                                <tr>
+                                    <td class="col-xs-1">
+                                        @Html.DisplayFor(modelItem => item.Author)
+                                    </td>
+                                    <td class="col-xs-1">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td class="col-xs-7">
+                                        @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td class="col-xs-1">
+                                        <a href="@Url.Action("Player", "MusicGen", new { id = item.Id })" class="btn btn-primary buttonMargin" role="button">Player</a>
+                                        <a href="@Url.Action("Edit", "MusicGen", new { id = item.Id, owner = item.Owner })" class="btn btn-warning buttonMargin" role="button">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

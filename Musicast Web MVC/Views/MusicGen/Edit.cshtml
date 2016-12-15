@@ -34,18 +34,23 @@
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
 
+                <label>Picture file</label>
+                <div class="editor-field">
+                    <input type="file" class="btn btn-default" name="uploadImage" />
+                </div>
+
                 @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                 {
                     <label>Owner</label>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Owner, new { @class = "form-control", @readonly = "readonly" })
                     </div>
+                    <label>Status</label>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.NewStatus,
+                        new SelectList(Enum.GetValues(typeof(Musicast_Web_MVC.Models.AllStatuses))))
+                    </div>
                 }
-
-                <label>Picture file</label>
-                <div class="editor-field">
-                    <input type="file" class="btn btn-default" name="uploadImage" />
-                </div>
 
                 <p class="editor-field">
                     <input type="submit" class="btn btn-warning" value="Edit" />
@@ -55,6 +60,14 @@
     }
     <div class="col-xs-0">
         <a href="@Url.Action("MusicGen")" class="btn btn-primary" role="button">Return to list</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a href="@Url.Action("AdminPanel","AdminPanel")" class="btn btn-primary" role="button">Return to admin panel</a>
+        }
+        @if (User.IsInRole("Moderator"))
+        {
+            <a href="@Url.Action("ModeratorPanel", "ModeratorPanel")" class="btn btn-primary" role="button">Return to moderator panel</a>
+        }
     </div>
 </body>
 </html>

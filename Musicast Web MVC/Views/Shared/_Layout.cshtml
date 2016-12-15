@@ -23,6 +23,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Admin Panel", "AdminPanel", "AdminPanel")</li>
+                    }
+                    @if (User.IsInRole("Moderator"))
+                    {
+                        <li>@Html.ActionLink("Moderator Panel", "ModeratorPanel", "ModeratorPanel")</li>
+                    }
                     <li>@Html.ActionLink("Sequencer", "Sequencer", "Sequencer")</li>
                     <li>@Html.ActionLink("MusicGen", "MusicGen", "MusicGen")</li>
                     <li>@Html.ActionLink("Chat", "Index", "Chat")</li>
