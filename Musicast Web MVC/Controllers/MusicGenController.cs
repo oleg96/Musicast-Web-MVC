@@ -9,12 +9,14 @@ using Musicast_Web_MVC.Models;
 using System.Data.Entity;
 using System.Drawing;
 using Newtonsoft.Json;
+using System.Dynamic;
 
 namespace Musicast_Web_MVC.Controllers
 {
     public class MusicGenController : Controller
     {
         PictureContext db = new PictureContext();
+        ImageContext dbImage = new ImageContext();
 
         public ActionResult MusicGen()
         {
@@ -23,7 +25,7 @@ namespace Musicast_Web_MVC.Controllers
 
         private void GenerateMusic(Picture picture)
         {
-            byte[] image = picture.Image;
+            /*byte[] image = picture.Image;
             ImageConverter ic = new ImageConverter();
             Image img = (Image)ic.ConvertFrom(image);
             Bitmap bitmap = new Bitmap(img);
@@ -294,7 +296,7 @@ namespace Musicast_Web_MVC.Controllers
             picture.Key = key;
             picture.Song = song;
             db.Entry(picture).State = EntityState.Modified;
-            db.SaveChanges();
+            db.SaveChanges();*/
         }
 
         private string GetKey(Bitmap bitmap)
@@ -493,7 +495,7 @@ namespace Musicast_Web_MVC.Controllers
                     imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                 }
                 // установка массива байтов
-                pic.Image = imageData;
+                //pic.Image = imageData;
                 pic.Owner = User.Identity.Name;
                 if (User.IsInRole("User"))
                 {
@@ -549,7 +551,7 @@ namespace Musicast_Web_MVC.Controllers
                         imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                     }
                     // установка массива байтов
-                    pic.Image = imageData;
+                    //pic.Image = imageData;
                     pic.Owner = User.Identity.Name;
                     pic.Status = "Waiting";
                 }
@@ -562,7 +564,7 @@ namespace Musicast_Web_MVC.Controllers
                         imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                     }
                     // установка массива байтов
-                    pic.Image = imageData;
+                    //pic.Image = imageData;
                     pic.Status = pic.NewStatus.ToString();
                 }
                 db.Entry(pic).State = EntityState.Modified;
@@ -582,9 +584,9 @@ namespace Musicast_Web_MVC.Controllers
                 }
                 db.Entry(pic).State = EntityState.Modified;
                 db.Entry(pic).Property(x => x.Owner).IsModified = false;
-                db.Entry(pic).Property(x => x.Image).IsModified = false;
-                db.Entry(pic).Property(x => x.Key).IsModified = false;
-                db.Entry(pic).Property(x => x.Song).IsModified = false;
+                //db.Entry(pic).Property(x => x.Image).IsModified = false;
+                //db.Entry(pic).Property(x => x.Key).IsModified = false;
+                //db.Entry(pic).Property(x => x.Song).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("MusicGen");
             }
@@ -620,14 +622,16 @@ namespace Musicast_Web_MVC.Controllers
         [HttpGet]
         public ActionResult Player(int? id)
         {
+            dynamic mymodel = new ExpandoObject();
             if (id == null)
             {
                 return HttpNotFound();
             }
-            Picture picture = db.Pictures.Find(id);
-            if (picture != null)
+            mymodel.Images = dbImage.Images.Where(r => r.Fk_Picture_Id == id);
+            mymodel.Pictures = db.Pictures.Find(id);
+            if (mymodel != null)
             {
-                return View(picture);
+                return View(mymodel);
             }
             return HttpNotFound();
         }

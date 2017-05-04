@@ -1,4 +1,5 @@
-﻿@model Musicast_Web_MVC.Models.Picture
+﻿@using Musicast_Web_MVC.Models
+@model dynamic
 @{
     ViewBag.Title = "Player";
 }
@@ -12,23 +13,32 @@
     <title></title>
 </head>
 <body class="body-style">
-    <input id="notesHidden" type="hidden" value=@Model.Song />
+@foreach (Image val in Model.Images)
+{
+    <input id="notesHidden" type="hidden" value=@val.Song />
+}
     <h2>Player</h2>
+@foreach (Picture val in Model.Pictures)
+{
         <label>Author</label>
-        <p>@Html.DisplayFor(model => model.Author)</p>
+        <p>@Html.DisplayFor(modelItem => val.Author)</p>
 
         <label>Name</label>
-        <p>@Html.DisplayFor(model => model.Name)</p>
+        <p>@Html.DisplayFor(modelItem => val.Name)</p>
 
         <label>Picture</label>
         <p>
             @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
-                                + Convert.ToBase64String(Model.Image) + "\" />")
-            @Html.DisplayFor(model => model.Description)
+                             + /*Convert.ToBase64String(Model.Image)*/"\" />")
+            @Html.DisplayFor(modelItem => val.Description)
         </p>
+}
 
         <label>Key</label>
-        <p>@Html.DisplayFor(model => model.Key)</p>
+@foreach (Image val in Model.Images)
+{
+        <p>@Html.DisplayFor(modelItem => val.Key)</p>
+}
     <div class="app">
         <div class="app-region" id="r-top">
             <div class="module transport">

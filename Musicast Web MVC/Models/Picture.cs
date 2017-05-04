@@ -11,10 +11,7 @@ namespace Musicast_Web_MVC.Models
         public string Author { set; get; }
         public string Name { set; get; }
         public string Description { set; get; }
-        public byte[] Image { set; get; }
         public string Owner { set; get; }
-        public string Key { set; get; }
-        public string Song { set; get; }
         public string Status { set; get; }
         public AllStatuses NewStatus { set; get; }
     }
