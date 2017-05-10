@@ -34,6 +34,20 @@
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
 
+                @foreach (var image in Model.Images)
+                {
+                    <label>Picture</label>
+                    <p>
+                        @Html.Raw("<img class='image' src=\"data:image/jpeg;base64,"
+                             + Convert.ToBase64String(image.ByteImage) + "\" />")
+                    </p>
+                    <div class="editor-field">
+                        <a href="@Url.Action("DeleteImage", new { id = image.Id })" class="btn btn-danger" role="button">Delete</a>
+                    </div>
+                    <label>Key</label>
+                    <p>@Html.DisplayFor(modelItem => image.Key)</p>
+                }
+
                 <label>Picture file</label>
                 <div class="editor-field">
                     <input type="file" class="btn btn-default" name="uploadImage" />

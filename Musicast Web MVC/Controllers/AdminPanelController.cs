@@ -15,7 +15,7 @@ namespace Musicast_Web_MVC.Controllers
 {
     public class AdminPanelController : Controller
     {
-        PictureContext dbp = new PictureContext();
+        AppContext dbp = new AppContext();
         // GET: AdminPanel
         [Authorize(Roles = "Admin")]
         [HttpGet]

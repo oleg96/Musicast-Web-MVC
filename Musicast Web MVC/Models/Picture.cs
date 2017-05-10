@@ -14,6 +14,11 @@ namespace Musicast_Web_MVC.Models
         public string Owner { set; get; }
         public string Status { set; get; }
         public AllStatuses NewStatus { set; get; }
+        public virtual ICollection<Image> Images { get; set; }
+        public Picture()
+        {
+            Images = new List<Image>();
+        }
     }
     public enum AllStatuses
     {

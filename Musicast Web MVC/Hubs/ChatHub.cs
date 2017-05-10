@@ -11,7 +11,7 @@ namespace Musicast_Web_MVC.Hubs
     {
         static List<User> Users = new List<User>();
 
-        MessageContext dbm = new MessageContext();
+        AppContext dbm = new AppContext();
 
         public void GetAllMessages()
         {

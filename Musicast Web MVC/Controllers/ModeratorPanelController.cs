@@ -9,7 +9,7 @@ namespace Musicast_Web_MVC.Controllers
 {
     public class ModeratorPanelController : Controller
     {
-        PictureContext db = new PictureContext();
+        AppContext db = new AppContext();
 
         [Authorize(Roles = "Moderator")]
         [HttpGet]

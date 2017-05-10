@@ -15,25 +15,25 @@ namespace Musicast_Web_MVC.Controllers
 {
     public class MusicGenController : Controller
     {
-        PictureContext db = new PictureContext();
-        ImageContext dbImage = new ImageContext();
+        AppContext db = new AppContext();
 
         public ActionResult MusicGen()
         {
             return View(db.Pictures);
         }
 
-        private void GenerateMusic(Picture picture)
+        private Models.Image GenerateMusic(Models.Image picture)
         {
-            /*byte[] image = picture.Image;
+            byte[] image = picture.ByteImage;
             ImageConverter ic = new ImageConverter();
-            Image img = (Image)ic.ConvertFrom(image);
+            System.Drawing.Image img = (System.Drawing.Image)ic.ConvertFrom(image);
             Bitmap bitmap = new Bitmap(img);
             string song = "";
             int width = bitmap.Width;
             int height = bitmap.Height;
             List<GeneratedNote> noteSequence = new List<GeneratedNote>();
             string key = GetKey(bitmap);
+            picture = GetQuality(bitmap, picture);
             string result = "";
             string lastResult = "0";
             int length = 0;
@@ -289,14 +289,9 @@ namespace Musicast_Web_MVC.Controllers
                 }
             }
             song = JsonConvert.SerializeObject(noteSequence);
-            //using (StreamWriter sw = new StreamWriter(Server.MapPath("~/Files/" + picture.Id + ".json"), false, System.Text.Encoding.Default))
-            //{
-            //    sw.WriteLine(song);
-            //}
             picture.Key = key;
             picture.Song = song;
-            db.Entry(picture).State = EntityState.Modified;
-            db.SaveChanges();*/
+            return picture;
         }
 
         private string GetKey(Bitmap bitmap)
@@ -327,7 +322,10 @@ namespace Musicast_Web_MVC.Controllers
             int averageG = (int)(G / countG);
             int averageB = (int)(B / countB);
             Color averageColor = Color.FromArgb(averageR, averageG, averageB);
+            float saturation = averageColor.GetSaturation();
             float brightness = averageColor.GetBrightness();
+            float hue = averageColor.GetHue();
+            int pixelCount = height * width;
             key = SearchNearestKeyColor(averageColor);
             if (brightness < 0.5)
             {
@@ -476,6 +474,45 @@ namespace Musicast_Web_MVC.Controllers
             return note;
         }
 
+        private Models.Image GetQuality(Bitmap bitmap, Models.Image picture)
+        {
+            int width = bitmap.Width;
+            int height = bitmap.Height;
+            Int64 R = 0;
+            Int64 G = 0;
+            Int64 B = 0;
+            Int64 countR = 0;
+            Int64 countG = 0;
+            Int64 countB = 0;
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Color pixelColor = bitmap.GetPixel(x, y);
+                    R += pixelColor.R;
+                    countR++;
+                    G += pixelColor.G;
+                    countG++;
+                    B += pixelColor.B;
+                    countB++;
+                }
+            }
+            int averageR = (int)(R / countR);
+            int averageG = (int)(G / countG);
+            int averageB = (int)(B / countB);
+            Color averageColor = Color.FromArgb(averageR, averageG, averageB);
+            float saturation = averageColor.GetSaturation();
+            float brightness = averageColor.GetBrightness();
+            float hue = averageColor.GetHue();
+            int pixelCount = height * width;
+            picture.Saturation = saturation;
+            picture.Brightness = brightness;
+            picture.Hue = hue;
+            picture.pixelCount = pixelCount;
+            picture.coefficient = saturation * brightness * hue * pixelCount;
+            return picture;
+        }
+
         [Authorize(Roles = "Admin, Moderator, User")]
         public ActionResult Create()
         {
@@ -495,7 +532,9 @@ namespace Musicast_Web_MVC.Controllers
                     imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                 }
                 // установка массива байтов
-                //pic.Image = imageData;
+                Models.Image newImage = new Models.Image();
+                newImage.ByteImage = imageData;
+                pic.Images.Add(GenerateMusic(newImage));
                 pic.Owner = User.Identity.Name;
                 if (User.IsInRole("User"))
                 {
@@ -507,7 +546,6 @@ namespace Musicast_Web_MVC.Controllers
                 }
                 db.Pictures.Add(pic);
                 db.SaveChanges();
-                GenerateMusic(pic);
                 return RedirectToAction("MusicGen");
             }
             return View(pic);
@@ -542,6 +580,7 @@ namespace Musicast_Web_MVC.Controllers
         {
             if (ModelState.IsValid && uploadImage != null)
             {
+                db.Entry(pic).State = EntityState.Modified;
                 if (User.IsInRole("User"))
                 {
                     byte[] imageData = null;
@@ -551,7 +590,9 @@ namespace Musicast_Web_MVC.Controllers
                         imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                     }
                     // установка массива байтов
-                    //pic.Image = imageData;
+                    Models.Image newImage = new Models.Image();
+                    newImage.ByteImage = imageData;
+                    pic.Images.Add(GenerateMusic(newImage));
                     pic.Owner = User.Identity.Name;
                     pic.Status = "Waiting";
                 }
@@ -564,16 +605,18 @@ namespace Musicast_Web_MVC.Controllers
                         imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
                     }
                     // установка массива байтов
-                    //pic.Image = imageData;
+                    Models.Image newImage = new Models.Image();
+                    newImage.ByteImage = imageData;
+                    pic.Images.Add(GenerateMusic(newImage));
                     pic.Status = pic.NewStatus.ToString();
                 }
-                db.Entry(pic).State = EntityState.Modified;
                 db.SaveChanges();
-                GenerateMusic(pic);
+                //GenerateMusic(pic);
                 return RedirectToAction("MusicGen");
             }
             else if (ModelState.IsValid && uploadImage == null)
             {
+                db.Entry(pic).State = EntityState.Modified;
                 if (User.IsInRole("User"))
                 {
                     pic.Status = "Waiting";
@@ -582,15 +625,37 @@ namespace Musicast_Web_MVC.Controllers
                 {
                     pic.Status = pic.NewStatus.ToString();
                 }
-                db.Entry(pic).State = EntityState.Modified;
                 db.Entry(pic).Property(x => x.Owner).IsModified = false;
-                //db.Entry(pic).Property(x => x.Image).IsModified = false;
-                //db.Entry(pic).Property(x => x.Key).IsModified = false;
-                //db.Entry(pic).Property(x => x.Song).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("MusicGen");
             }
             return View(pic);
+        }
+
+        [Authorize(Roles = "Admin, Moderator, User")]
+        [HttpGet]
+        public ActionResult DeleteImage(int id)
+        {
+            Models.Image image = db.Images.Find(id);
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+            return View(image);
+        }
+
+        [Authorize(Roles = "Admin, Moderator, User")]
+        [HttpPost, ActionName("DeleteImage")]
+        public ActionResult DeleteImageConfirmed(int id)
+        {
+            Models.Image image = db.Images.Find(id);
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+            db.Images.Remove(image);
+            db.SaveChanges();
+            return RedirectToAction("MusicGen");
         }
 
         [Authorize(Roles = "Admin")]
@@ -622,16 +687,14 @@ namespace Musicast_Web_MVC.Controllers
         [HttpGet]
         public ActionResult Player(int? id)
         {
-            dynamic mymodel = new ExpandoObject();
+            Picture picture = db.Pictures.Find(id);
             if (id == null)
             {
                 return HttpNotFound();
             }
-            mymodel.Images = dbImage.Images.Where(r => r.Fk_Picture_Id == id);
-            mymodel.Pictures = db.Pictures.Find(id);
-            if (mymodel != null)
+            if (picture != null)
             {
-                return View(mymodel);
+                return View(picture);
             }
             return HttpNotFound();
         }

@@ -5,7 +5,7 @@ namespace Musicast_Web_MVC.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Musicast_Web_MVC.Models.PictureContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Musicast_Web_MVC.Models.AppContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Musicast_Web_MVC.Migrations
             ContextKey = "Musicast_Web_MVC.Models.PictureContext";
         }
 
-        protected override void Seed(Musicast_Web_MVC.Models.PictureContext context)
+        protected override void Seed(Musicast_Web_MVC.Models.AppContext context)
         {
             //  This method will be called after migrating to the latest version.
 
